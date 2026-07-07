@@ -1,0 +1,31 @@
+{
+  "workbench.colorCustomizations": {
+    "editor.background": "{{colors.inverse_on_surface.dark.hex}}10",
+    "editor.foreground": "{{colors.on_surface.dark.hex}}",
+
+    "sideBar.background": "{{colors.surface_container.dark.hex}}",
+    "sideBar.foreground": "{{colors.on_surface.dark.hex}}",
+
+    "activityBar.background": "{{colors.surface_container_low.dark.hex}}",
+    "activityBar.foreground": "{{colors.on_surface.dark.hex}}",
+
+    "statusBar.background": "{{colors.surface_container_low.dark.hex}}",
+    "statusBar.foreground": "{{colors.on_surface.dark.hex}}",
+
+    "titleBar.activeBackground": "{{colors.surface_container_low.dark.hex}}",
+    "titleBar.activeForeground": "{{colors.on_surface.dark.hex}}",
+
+    "editorCursor.foreground": "{{colors.primary.dark.hex}}",
+
+    "editor.selectionBackground": "{{colors.primary_container.dark.hex}}",
+    "editor.selectionHighlightBackground": "{{colors.primary_container.dark.hex}}66",
+
+    "focusBorder": "{{colors.primary.dark.hex}}",
+
+    "panel.background": "{{colors.surface.dark.hex}}",
+
+    "terminal.background": "{{colors.surface.dark.hex}}",
+
+    "terminal.foreground": "{{colors.on_surface.dark.hex}}"
+  }
+}

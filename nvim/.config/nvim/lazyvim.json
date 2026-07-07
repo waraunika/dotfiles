@@ -1,0 +1,13 @@
+{
+  "extras": [
+    "lazyvim.plugins.extras.ui.alpha",
+    "plugins.extras.editor.neo-tree",
+    "plugins.extras.editor.snacks_explorer",
+    "plugins.extras.ui.alpha"
+  ],
+  "install_version": 8,
+  "news": {
+    "NEWS.md": "11866"
+  },
+  "version": 8
+}
