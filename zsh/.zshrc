@@ -100,6 +100,7 @@ alias balanced='powerprofilesctl set balanced'
 alias performance='powerprofilesctl set performance'
 alias battery-saver='powerprofilesctl set power-saver'
 alias battery='sudo systemctl start battery.service'
+alias nvim='tm'
 
 alias pyq='~/Documents/latex/PYQ-7th-sem'
 
@@ -113,6 +114,17 @@ function y() {
 	IFS= read -r -d '' cwd < "$tmp"
 	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
 	command rm -f -- "$tmp"
+}
+
+tm() {
+  local dir="${1:-.}"
+  local name=$(basename "$dir" | tr '.' '_')  # tmux session names can't contain dots
+
+  if tmux has-session -t "$name" 2>/dev/null; then
+    tmux attach -t "$name"        # session already exists, just reconnect
+  else
+    tmux new-session -s "$name" -c "$dir" "nvim ."
+  fi
 }
 
 eval "$(zoxide init zsh)"

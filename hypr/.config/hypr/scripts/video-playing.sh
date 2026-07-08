@@ -1,4 +1,4 @@
-if audio_detec.sh; then
+if audio_detect.sh; then
 	exit 0
 fi
 

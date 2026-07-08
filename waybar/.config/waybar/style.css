@@ -146,7 +146,7 @@ tooltip label {
 }
 
 #audio label {
-  color: @tertiary2;
+  color: @tertiary;
 }
 
 /* ** Brightness ** */

@@ -1,5 +1,6 @@
 -- https://github.com/akinsho/bufferline.nvim
 local colors = require("colors")
+
 return {
   'akinsho/bufferline.nvim',
   dependencies = {
@@ -50,10 +51,10 @@ return {
         buffer_selected = {
           bold = true,
           italic = false,
-					fg = colors.on_primary_container
+					fg = colors.on_primary_container,
         },
         separator_selected = {
-					fg = "#000000"
+					fg = colors.on_secondary,
 				},
         -- tab_selected = {},
         -- background = {},

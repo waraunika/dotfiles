@@ -1,14 +1,14 @@
 local vars = require("binds.variables")
 
 local keymaps = {
-  -- format: { key, cmd, mods, (that are optional)}
+  -- format: { key, cmd, mods (that are optional)}
   { "Return", vars.apps.terminal },
   { "Return", "[float] kitty",                                                                               { vars.mods.priMod } },
   { "B",      vars.apps.browser },
   { "D",      "vesktop" },
+  { "E",      vars.apps.fileManager },
   { "E",      vars.apps.fileManager1, { vars.mods.priMod } },
   { "E",      vars.apps.fileManager2, { vars.mods.secMod } },
-  { "E",      vars.apps.fileManager },
   { "O",      "obsidian" },
   { "V",      "codium" },
   { "Z",      "zathura" },

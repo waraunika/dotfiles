@@ -32,6 +32,7 @@ require("lazy").setup({
   require 'plugins.workflow.telescope',
   require 'plugins.workflow.lsp',
   require 'plugins.workflow.completion',
+  require 'plugins.workflow.zen-mode',
 
 	require 'plugins.language.tex',
   require 'plugins.language.markdown',

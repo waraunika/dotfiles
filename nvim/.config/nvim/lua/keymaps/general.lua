@@ -16,6 +16,11 @@ keymap({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 keymap('n', '<C-s>', '<cmd> w <CR>', opts)
 keymap('i', '<C-s>', '<cmd> w <CR>', opts)
 
+-- Shift + Tab to remove indentation inline
+keymap("n", "<S-Tab>", "<<", opts)
+keymap("i", "<S-Tab>", "<C-d>", opts)
+keymap("v", "<S-Tab>", "<gv", opts)
+
 -- save file without auto formatting
 keymap('n', '<leader>sn', '<cmd>noautocmd w <CR>', opts)
 

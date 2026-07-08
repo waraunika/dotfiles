@@ -1,11 +1,13 @@
 -- github.com/shaunsingh/nord.nvim 
+
 local colors = require("colors")
+
 return {
 	"shaunsingh/nord.nvim",
 	priority = 1000, -- Ensure it loads first
 	config = function()
 		vim.g.nord_disable_background = true
-	
+
 		require("nord").set()
 
 		vim.api.nvim_set_hl(0, "AlphaHeader", { fg = "#FFFFFF", bg = "#282e37", bold = true })
@@ -29,7 +31,6 @@ return {
 			}
 		})
 
-		
 		require("notify").setup({
 			background_colour = "#2E3440",
 		})
@@ -43,29 +44,22 @@ return {
 			vim.g.nord_disable_background = bg_transparent
 			require("nord").set()
 
-			require("bufferline").setup({
-				options = {
-					separator_style = "slant",
-					style = "none"
-				},
-				highlights = {
-					separator = {
-						fg = "#2e3440",
-					},
-					separator_selected = {
-						fg = "#2e3440",
-					},
-					buffer_selected = {
-						bold = true,
-						italic = false,
-						fg = colors.on_primary_container
-					},
-				}
-			})
+			if bg_transparent then
+				require("notify").setup({
+					background_colour = "#2E3440",
+				})
 
-			require("notify").setup({
-				background_colour = "#2E3440",
-			})
+				vim.api.nvim_set_hl(0, "BufferLineSeparatorSelected", { fg = "#000000" })
+				vim.api.nvim_set_hl(0, "BufferLineSeparator", { fg = "#2e3440" })
+				vim.api.nvim_set_hl(0, "BufferLineBufferSelected", { bold = true, italic = false })
+			else
+				vim.api.nvim_set_hl(0, "BufferLineSeparatorSelected", { fg = "#000000" })
+				vim.api.nvim_set_hl(0, "BufferLineSeparator", { fg = colors.on_secondary_fixed })
+				vim.api.nvim_set_hl(0, "BufferLineSeparatorSelected", { fg = "#000000" })
+				vim.api.nvim_set_hl(0, "BufferLineSeparator", { fg = "#2e3440" })
+				vim.api.nvim_set_hl(0, "BufferLineBufferSelected", { bold = true, italic = false })
+			end
+
 		end
 
 		vim.keymap.set("n", "<leader>bg", toggle_transparency, { noremap = true, silent = false })
