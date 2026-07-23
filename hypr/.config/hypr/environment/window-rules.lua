@@ -99,12 +99,38 @@ hl.window_rule({
 })
 
 hl.window_rule({
-	name = "Discord in 2nd workspace spawn",
+	name = "Octave graph",
+	match = {
+		class = "octave-gui",
+		title = "Figure 1",
+	},
+
+	float = true,
+	size = { "monitor_w / 2", "monitor_h / 2" },
+	-- move = { "monitor_w * 0.5 + 15", "(monitor_h /2)" }
+	move = { "monitor_w * 1/2", "monitor_h * 1/2" },
+})
+
+hl.window_rule({
+	name = "Matplotplusplus graph",
+	match = {
+		class = "gnuplot_qt",
+		title = "Figure 1",
+	},
+
+	float = true,
+	size = { "monitor_w / 2", "monitor_h / 2" },
+	-- move = { "monitor_w * 0.5 + 15", "(monitor_h /2)" }
+	move = { "monitor_w * 1/4", "monitor_h * 1/4" },
+})
+
+hl.window_rule({
+	name = "Discord in 10th workspace spawn",
 	match = {
 		class = "vesktop",
 	},
 
-	workspace = 2,
+	workspace = 10,
 })
 
 hl.window_rule({
@@ -116,6 +142,61 @@ hl.window_rule({
 
 	float = true,
 	size = { "monitor_w / 4", "monitor_h / 4" },
-	-- move = { "monitor_w * 0.5 + 15", "(monitor_h /2)" }
+	move = { "monitor_w * 1/4", "monitor_h * 1/4" },
+})
+
+hl.window_rule({
+	name = "Steam Friend List Floating",
+	match = {
+		class = "steam",
+		title = "Friends List",
+	},
+
+	float = true,
+	size = { "monitor_w / 4", "monitor_h / 4" },
+})
+
+hl.window_rule({
+	name = "Stem in 9th workspace spawn",
+	match = {
+		class = "steam",
+	},
+
+	workspace = 9,
+})
+
+hl.window_rule({
+	name = "Whatsapp call floating",
+	match = {
+		class = "firefox",
+		title = "WhatsApp call — Original profile — Mozilla Firefox",
+	},
+
+	float = true,
+	size = { "monitor_w / 4", "monitor_h / 4" },
+	move = { "monitor_w * 1/4", "monitor_h * 1/4" },
+})
+
+hl.window_rule({
+	name = "Firefox library floating",
+	match = {
+		class = "firefox",
+		title = "Library",
+	},
+
+	float = true,
+	size = { "monitor_w / 2", "monitor_h / 2" },
+	move = { "monitor_w * 1/4", "monitor_h * 1/4" },
+})
+
+hl.window_rule({
+	name = "Thunderbird new event floating",
+	match = {
+		class = "org.mozilla.Thunderbird",
+		title = "New Event",
+	},
+
+	float = true,
+	size = { "monitor_w / 2", "monitor_h / 2" },
 	move = { "monitor_w * 1/4", "monitor_h * 1/4" },
 })

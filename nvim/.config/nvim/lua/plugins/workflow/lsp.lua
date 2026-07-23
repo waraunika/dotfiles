@@ -45,6 +45,31 @@ return {
 			for _, server in ipairs(servers) do
 				vim.lsp.config(server, { capabilities = capabilities })
 			end
+
+      vim.lsp.config("ts_lr", {
+        settings = {
+          completions = {
+            completeFunctionCalls = true,
+          },
+          typescript = {
+            suggest = {
+              includeCompletionsForModuleExports = true,
+            },
+            preferences = {
+              includePackageJsonAutoImports = "auto",
+            },
+          },
+          javascript = {
+            suggest = {
+              includeCompletionsForModuleExports = true,
+            },
+            preferences = {
+              includePackageJsonAutoImports = "auto",
+            },
+          },
+        }
+      })
+
 			vim.lsp.enable(servers)
 
 			vim.api.nvim_create_autocmd("LspAttach", {

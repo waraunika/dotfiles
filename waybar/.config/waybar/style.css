@@ -3,49 +3,49 @@
 /* ** Base CSS ** */
 
 * {
-  border: none;
-  border-radius: 0px;
+	border: none;
+	border-radius: 0px;
 
-  font-family: 'JetBrainsMono Nerd Font Propo', 'GeistMono Nerd Font Propo', sans-serif;
-  font-weight: bold;
-  
-  min-height: 0;
-  padding: 0;
-  margin: 0 0 0 0;
+	font-family: 'JetBrainsMono Nerd Font Propo', 'GeistMono Nerd Font Propo', sans-serif;
+	font-weight: bold;
 
-  color: @foreground;
+	min-height: 0;
+	padding: 0;
+	margin: 0 0 0 0;
 
-  box-shadow: none;
+	color: @foreground;
+
+	box-shadow: none;
 }
 
 window#waybar {
-  background-color: alpha(@background, 0.1);
-  padding: 0px;
+	background-color: alpha(@background, 0.1);
+	padding: 0px;
 }
 
 /* ** Tool Tip CSS ** */
 
 tooltip {
-  border-radius: 12px;
-  border-width: 2px;
-  border-style: solid;
-  border-color: @secondary_container;
+	border-radius: 12px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: @secondary_container;
 
-  padding: 2px;
+	padding: 2px;
 
-  background-color: alpha(@base01, 0.8);
+	background-color: alpha(@base01, 0.8);
 }
 
 tooltip label {
-  color: @primary;
-  padding: 2px;
+	color: @primary;
+	padding: 2px;
 }
 
 /* ** Idle Inhibitor CSS ** */
 
 #idle_inhibitor {
-  color: @foreground;
-  border: 1px solid @base04;
+	color: @foreground;
+	border: 1px solid @base04;
 	border-radius: 10px;
 	padding: 4px 8px;
 	margin-right: 4px;
@@ -56,77 +56,78 @@ tooltip label {
 /* ** Workspace CSS ** */
 
 #workspaces {
-  margin-right: 4px;
-  border: 1px solid @source;
-  border-radius: 10px;
+	margin-right: 4px;
+	border: 1px solid @source;
+	border-radius: 10px;
 
-  padding: 4px 2px;
+	padding: 4px 2px;
 
-  background: alpha(@on_primary2, 0.1);
+	background: alpha(@on_primary2, 0.1);
 }
 
 #workspaces button {
-  border: 1px solid alpha(@primary, 0.5);
-  margin: 0px 2px;
-  border-radius: 5px;
+	border: 1px solid alpha(@primary, 0.5);
+	margin: 0px 2px;
+	border-radius: 5px;
 }
 
 #workspaces button label {
 	color: @primary;
-  padding-left: 6px;
-  margin: 0px 2px;
-  font-size: 11px;
+	padding-left: 6px;
+	margin: 0px 2px;
+	font-size: 11px;
 }
 
-#workspaces button:hover{
-  background: @secondary_container;
+#workspaces button:hover {
+	background: @secondary_container;
 }
 
 #workspaces button:hover label {
-  font-size: 11px;
-  font-weight: bold;
+	font-size: 11px;
+	font-weight: bold;
 }
 
 #workspaces button.active,
 #workspaces button.active label {
-  color: @primary ;
-  background-color: alpha(@secondary_container, 0.4);
+	color: @primary ;
+	background-color: alpha(@secondary_container, 0.4);
 
-  font-size: 14px;
-  font-weight: bold;
+	font-size: 14px;
+	font-weight: bold;
 
-  padding: 0px 5px;
-  min-width: 50px;
+	padding: 0px 5px;
+	min-width: 50px;
 }
 
 #workspaces button:focus,
 #workspaces button:focus label {
-  background-color: transparent;
+	background-color: transparent;
 }
 
 #workspaces button.urgent {
-  color: #11111b;
-  background: @error_container;
-  border-radius: 15px;
+	color: #11111b;
+	background: @error_container;
+	border-radius: 15px;
 }
 
 /* ** Window CSS ** */
 #window {
-  padding: 4px 8px;
+	padding: 4px 8px;
 
-  background-color: alpha(@source, 0.1);
+	background-color: alpha(@source, 0.1);
 }
 
 #window label {
-  color: @primary3;
+	color: @primary3;
 }
 
 #custom-swaync {
-  background: alpha(@on_tertiary_container, 0.1);
-  margin-right: 4px;
+	background: alpha(@on_tertiary_container, 0.1);
+	margin-right: 4px;
 }
+
 #custom-swaync label {
-  color: @secondary3;
+	color: @secondary3;
 }
 
 
@@ -134,77 +135,79 @@ tooltip label {
 
 #clock,
 #clock-calender {
-  color: @primary;
-  margin-right: 4px;
-  background: alpha(@on_primary_container, 0.1);
+	color: @primary;
+	margin-right: 4px;
+	background: alpha(@on_primary_container, 0.1);
 }
 
 /* **Audio** */
 
 #audio {
-  background: alpha(@on_secondary_container, 0.1);
+	background: alpha(@on_secondary_container, 0.1);
 }
 
 #audio label {
-  color: @tertiary;
+	color: @tertiary;
 }
 
 /* ** Brightness ** */
 
 #backlight {
-  background: alpha(@surface, 0.1);
-  color: @on_surface;
-  margin-right: 4px;
+	background: alpha(@surface, 0.1);
+	color: @on_surface;
+	margin-right: 4px;
 }
+
 /* ** Battery ** */
 
 #battery {
-  background: alpha(@surface2, 0.2);
-  color: @on_surface;
-  margin-right: 4px;
+	background: alpha(@surface2, 0.2);
+	color: @on_surface;
+	margin-right: 4px;
 }
 
 #mobo_drawer {
-  background: alpha(@surface3, 0.3);
-  margin-right: 4px;
+	background: alpha(@surface3, 0.3);
+	margin-right: 4px;
 }
 
 #mobo_drawer label {
-  background: alpha(@surface3, 0.2);
-  margin-right: 4px;
-  color: @on_surface;
+	background: alpha(@surface3, 0.2);
+	margin-right: 4px;
+	color: @on_surface;
 }
 
 /* ** Network Speed ** */
 
 #conn {
-  margin-right: 4px;
+	margin-right: 4px;
 }
 
 #network {
-  color: @on_surface;
-  background: alpha(@surface4, 0.1);
+	color: @on_surface;
+	background: alpha(@surface4, 0.1);
 }
 
 #network label {
-  color: @on_surface;
+	color: @on_surface;
 }
 
 #network.speed {
-  font-size: 10px;
-  font-weight: lighter;
-  padding-left: 0;
-  padding-right: 0;
+	font-size: 10px;
+	font-weight: lighter;
+	padding-left: 0;
+	padding-right: 0;
 }
+
 .group-network {
-  padding: 0;
-  margin: 0;
+	padding: 0;
+	margin: 0;
 }
 
 /* ** Tray CSS ** */
 #tray {
-  margin-right: 4px;
-  border: 1px solid @base04;
+	margin-right: 4px;
+	border: 1px solid @base04;
 }
 
 #idle_inhibitor,
@@ -220,8 +223,8 @@ tooltip label {
 #battery,
 #mobo_drawer,
 #mpris {
-  border: 1px solid @source;
-  border-radius: 10px;
+	border: 1px solid @source;
+	border-radius: 10px;
 
-  padding: 2px 8px;
+	padding: 2px 8px;
 }

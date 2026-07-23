@@ -1,104 +1,104 @@
 return {
-    image = "/home/waraunika/Pictures/Wallpapers/Nord/mountains.jpg",
+    image = "/home/waraunika/Pictures/Wallpapers/athena.jpg",
 
-    background = "#111318",
+    background = "#0f1416",
 
     error = "#ffb4ab",
 
     error_container = "#93000a",
 
-    inverse_on_surface = "#2e3036",
+    inverse_on_surface = "#2c3133",
 
-    inverse_primary = "#425e91",
+    inverse_primary = "#00687a",
 
-    inverse_surface = "#e2e2e9",
+    inverse_surface = "#dee3e5",
 
-    on_background = "#e2e2e9",
+    on_background = "#dee3e5",
 
     on_error = "#690005",
 
     on_error_container = "#ffdad6",
 
-    on_primary = "#0d2f5f",
+    on_primary = "#003640",
 
-    on_primary_container = "#d7e2ff",
+    on_primary_container = "#acecff",
 
-    on_primary_fixed = "#001b3f",
+    on_primary_fixed = "#001f26",
 
-    on_primary_fixed_variant = "#294677",
+    on_primary_fixed_variant = "#004e5c",
 
-    on_secondary = "#283041",
+    on_secondary = "#1d343a",
 
-    on_secondary_container = "#dae2f9",
+    on_secondary_container = "#cee7ef",
 
-    on_secondary_fixed = "#131c2c",
+    on_secondary_fixed = "#061f24",
 
-    on_secondary_fixed_variant = "#3e4759",
+    on_secondary_fixed_variant = "#334a51",
 
-    on_surface = "#e2e2e9",
+    on_surface = "#dee3e5",
 
-    on_surface_variant = "#c4c6d0",
+    on_surface_variant = "#bfc8cb",
 
-    on_tertiary = "#3f2844",
+    on_tertiary = "#282f4d",
 
-    on_tertiary_container = "#fad8fc",
+    on_tertiary_container = "#dde1ff",
 
-    on_tertiary_fixed = "#29132e",
+    on_tertiary_fixed = "#131937",
 
-    on_tertiary_fixed_variant = "#573e5b",
+    on_tertiary_fixed_variant = "#3f4565",
 
-    outline = "#8e9099",
+    outline = "#899295",
 
-    outline_variant = "#44474e",
+    outline_variant = "#3f484b",
 
-    primary = "#abc7ff",
+    primary = "#85d2e7",
 
-    primary_container = "#294677",
+    primary_container = "#004e5c",
 
-    primary_fixed = "#d7e2ff",
+    primary_fixed = "#acecff",
 
-    primary_fixed_dim = "#abc7ff",
+    primary_fixed_dim = "#85d2e7",
 
     scrim = "#000000",
 
-    secondary = "#bec6dc",
+    secondary = "#b2cbd2",
 
-    secondary_container = "#3e4759",
+    secondary_container = "#334a51",
 
-    secondary_fixed = "#dae2f9",
+    secondary_fixed = "#cee7ef",
 
-    secondary_fixed_dim = "#bec6dc",
+    secondary_fixed_dim = "#b2cbd2",
 
     shadow = "#000000",
 
-    source_color = "#747c8f",
+    source_color = "#1e282b",
 
-    surface = "#111318",
+    surface = "#0f1416",
 
-    surface_bright = "#37393e",
+    surface_bright = "#343a3c",
 
-    surface_container = "#1e2025",
+    surface_container = "#1b2022",
 
-    surface_container_high = "#282a2f",
+    surface_container_high = "#252b2d",
 
-    surface_container_highest = "#33353a",
+    surface_container_highest = "#303638",
 
-    surface_container_low = "#1a1c20",
+    surface_container_low = "#171c1e",
 
-    surface_container_lowest = "#0c0e13",
+    surface_container_lowest = "#090f11",
 
-    surface_dim = "#111318",
+    surface_dim = "#0f1416",
 
-    surface_tint = "#abc7ff",
+    surface_tint = "#85d2e7",
 
-    surface_variant = "#44474e",
+    surface_variant = "#3f484b",
 
-    tertiary = "#ddbce0",
+    tertiary = "#bfc4eb",
 
-    tertiary_container = "#573e5b",
+    tertiary_container = "#3f4565",
 
-    tertiary_fixed = "#fad8fc",
+    tertiary_fixed = "#dde1ff",
 
-    tertiary_fixed_dim = "#ddbce0",
+    tertiary_fixed_dim = "#bfc4eb",
 
 }

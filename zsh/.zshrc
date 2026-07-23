@@ -87,7 +87,7 @@ source $ZSH/oh-my-zsh.sh
 alias y='yay -Syu --needed'
 alias p='sudo pacman -Syu --needed'
 
-alias ls='exa -la --icons'
+alias ls='exa --icons -la'
 
 alias wifi="nmcli dev wifi"
 alias wr='nmcli dev wifi connect "Red Roc"'
@@ -100,9 +100,8 @@ alias balanced='powerprofilesctl set balanced'
 alias performance='powerprofilesctl set performance'
 alias battery-saver='powerprofilesctl set power-saver'
 alias battery='sudo systemctl start battery.service'
-alias nvim='tm'
 
-alias pyq='~/Documents/latex/PYQ-7th-sem'
+alias pyq='~/Latex/PYQ-7th-sem'
 
 chpwd() {
   ls
