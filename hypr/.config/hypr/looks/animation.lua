@@ -48,9 +48,9 @@ hl.curve("quick", {
 hl.curve("easy",
 	{
 		type = "spring",
-		mass = 1,
-		stiffness = 71.2633,
-		dampening = 15.8273644,
+		mass = 0.6,
+		stiffness = 150,
+		dampening = 15,
 	}
 )
 

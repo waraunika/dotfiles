@@ -8,7 +8,7 @@ hl.bind(vars.mods.priMod .. "+" .. vars.mods.secMod .. "+ 1",
 	hl.dsp.exec_cmd('grim -g "$(slurp)" "$HOME/Pictures/Screenshots/$(date +%Y%m%d_%H%M%S).png"'))
 hl.bind(mainMod .. "+" .. vars.mods.secMod .. "+ S", hl.dsp.exec_cmd('grim -g "$(slurp)" - | wl-copy'))
 
-hl.bind(mainMod .. "+ period", hl.dsp.exec_cmd("wofi-emoji"))
+hl.bind(mainMod .. "+ period", hl.dsp.exec_cmd("$HOME/scripts/0wofi-emoji"))
 
 hl.bind(mainMod .. "+" .. vars.mods.secMod .. "+ H", hl.dsp.exec_cmd("hyprpicker -a"))
 

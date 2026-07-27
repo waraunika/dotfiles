@@ -13,7 +13,9 @@ local keymaps = {
 	{ "O",      "obsidian" },
 	{ "S",      "prime-run steam" },
 	{ "V",      "codium" },
-	{ "Z",      "zathura" },
+	{ "W",      "whatsie" },
+	{ "Y",      vars.apps.browser .. " youtube.com" },
+	{ "Z",      "sioyek" },
 	{ "M",      "command -v hyprshutdown > /dev/null 2&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'", { vars.mods.priMod, vars.mods.secMod } },
 }
 
@@ -31,3 +33,4 @@ end
 -- for switching to steam/discord even when not spawning:
 hl.bind(mainMod .. "+ S", hl.dsp.focus({ workspace = 9 }))
 hl.bind(mainMod .. "+ D", hl.dsp.focus({ workspace = 10 }))
+hl.bind(mainMod .. "+ W", hl.dsp.focus({ workspace = 10 }))

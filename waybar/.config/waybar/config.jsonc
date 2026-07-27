@@ -280,6 +280,7 @@
 			"class<[Tt]hunderbird|[Tt]hunderbird-esr>": " ",
 			"class<eu.betterbird.Betterbird>": " ",
 			"title<.*gmail.*>": "󰊫 ",
+			"title<.*thunderbird*>": "  ",
 			"class<[Tt]elegram-desktop|org.telegram.desktop|io.github.tdesktop_x64.TDesktop>": " ",
 			"class<discord|discord-canary|[Ww]ebcord|[Vv]esktop|com.discordapp.Discord|dev.vencord.Vesktop>": " ",
 			"class<[Ss]ignal|signal-desktop|org.signal.Signal>": "󰍩 ",

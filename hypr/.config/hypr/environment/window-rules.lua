@@ -134,6 +134,15 @@ hl.window_rule({
 })
 
 hl.window_rule({
+	name = "Whatsie in 10th workspace spawn",
+	match = {
+		class = "whatsie",
+	},
+
+	workspace = 10,
+})
+
+hl.window_rule({
 	name = "GTKWave floating",
 	match = {
 		class = "gtkwave",
@@ -194,6 +203,17 @@ hl.window_rule({
 	match = {
 		class = "org.mozilla.Thunderbird",
 		title = "New Event",
+	},
+
+	float = true,
+	size = { "monitor_w / 2", "monitor_h / 2" },
+	move = { "monitor_w * 1/4", "monitor_h * 1/4" },
+})
+
+hl.window_rule({
+	name = "Select google account floating",
+	match = {
+		title = ".*?\\bSign in - Google Accounts\\b.*?",
 	},
 
 	float = true,

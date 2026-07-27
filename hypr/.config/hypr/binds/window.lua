@@ -1,9 +1,10 @@
 local vars = require("binds.variables")
 local mainMod = vars.mods.mainMod
 
-hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen("maximized", "toggle"))
-hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + Q", hl.dsp.window.close())
+hl.bind(mainMod .. "+ F", hl.dsp.window.fullscreen("maximized", "toggle"))
+hl.bind(mainMod .. "+" .. vars.mods.priMod .. " + F", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. "+ P", hl.dsp.window.pseudo())
+hl.bind(mainMod .. "+ Q", hl.dsp.window.close())
 hl.bind(mainMod .. "+" .. vars.mods.secMod .. "+ T", hl.dsp.group.toggle())
 
 hl.bind(

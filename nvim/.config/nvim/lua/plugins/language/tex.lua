@@ -22,5 +22,5 @@ return {
 			vim.g.vimtex_view_automatic = 1
 			vim.g.vimtex_quickfix_mode = 2
 		end,
-	}
+	},
 }

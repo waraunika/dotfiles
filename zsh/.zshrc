@@ -9,6 +9,7 @@ fi
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your Oh My Zsh installation.
+export PATH="$HOME/scripts:$PATH"
 export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
@@ -128,7 +129,10 @@ tm() {
 
 eval "$(zoxide init zsh)"
 
+
 # User configuration
+export VISUAL="neovim"
+export EDITOR="neovim"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
