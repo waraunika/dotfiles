@@ -301,6 +301,7 @@
 			"class<Cider>": "󰎆 ",
 			"title<.*Picture-in-Picture.*>": " ",
 			"title<.*youtube.*>": " ",
+			"class<.*zathura.*>": "#",
 			"class<vlc>": "󰕼 ",
 			"class<[Kk]denlive|org.kde.kdenlive>": "🎬 ",
 			"title<.*Kdenlive.*>": "🎬 ",

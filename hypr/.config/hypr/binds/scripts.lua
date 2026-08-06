@@ -9,8 +9,7 @@ hl.bind(script .. "+ R", hl.dsp.exec_cmd(".config/hypr/scripts/record-soundless.
 
 hl.bind(script .. "+ E", hl.dsp.exec_cmd(".config/hypr/scripts/rest-reminder.sh"))
 
-
-hl.bind(script .. "+ B", hl.dsp.exec_cmd("rest toggle"))
-hl.bind(script .. "+" .. vars.mods.priMod .. "+ B", hl.dsp.exec_cmd("rest start"))
-hl.bind(script .. "+" .. vars.mods.secMod .. "+ B", hl.dsp.exec_cmd("rest stop"))
-hl.bind(script .. "+" .. vars.mods.priMod .. "+" .. vars.mods.secMod .. "+ B", hl.dsp.exec_cmd("rest status"))
+hl.bind(script .. "+ B", hl.dsp.exec_cmd("scripts/rest toggle"))
+hl.bind(script .. "+" .. vars.mods.priMod .. "+ B", hl.dsp.exec_cmd("scripts/rest start"))
+hl.bind(script .. "+" .. vars.mods.secMod .. "+ B", hl.dsp.exec_cmd("scripts/rest stop"))
+hl.bind(script .. "+" .. vars.mods.priMod .. "+" .. vars.mods.secMod .. "+ B", hl.dsp.exec_cmd("scripts/rest status"))

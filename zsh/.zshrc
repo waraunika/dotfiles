@@ -92,6 +92,9 @@ alias ls='exa --icons -la'
 
 alias wifi="nmcli dev wifi"
 alias wr='nmcli dev wifi connect "Red Roc"'
+alias ws='nmcli dev wifi connect "slowly"'
+alias wr='nmcli dev wifi connect "PC_ELEXCOMP"'
+
 alias disconnect="nmcli connection down id"
 
 alias :q="exit"
@@ -103,6 +106,28 @@ alias battery-saver='powerprofilesctl set power-saver'
 alias battery='sudo systemctl start battery.service'
 
 alias pyq='~/Latex/PYQ-7th-sem'
+
+mount-phone() {
+	mkdir -p /mnt/phone 2>/dev/null || sudo mkdir -p /mnt/phone && sudo chown "$USER":"$USER" /mnt/phone
+	if jmtpfs /mnt/phone; then
+		ln -sf /mnt/phone/Internal\ shared\ storage/ ~/phone
+		echo "Phone mounted at /mnt/phone and ~/phone"
+		ls -la ~/phone
+	else
+		echo "Failed to mount phone"
+		return 1
+	fi
+}
+
+umount-phone() {
+	if fusermount -u /mnt/phone 2>/dev/null; then
+		rm -f ~/phone
+		echo "Phone unmounted and symlink removed"
+	else
+		echo "Failed to unmount."
+		return 1
+	fi
+}
 
 chpwd() {
   ls

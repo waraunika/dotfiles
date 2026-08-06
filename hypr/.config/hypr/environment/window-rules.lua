@@ -82,7 +82,7 @@ hl.window_rule({
 	float = true,
 	size = { "monitor_w / 3", "monitor_h / 3" },
 	-- move = { "monitor_w * 0.5 + 15", "(monitor_h /2)" }
-	move = { "monitor_w * 2/3", "monitor_h * 2/3" },
+	move = { "monitor_w * 2/3", "0" },
 })
 
 hl.window_rule({

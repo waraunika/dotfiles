@@ -6,7 +6,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	if vim.v.shell_error ~= 0 then
 		vim.api.nvim_echo({
 			{ "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-			{ out,                            "WarningMsg" },
+			{ out, "WarningMsg" },
 			{ "\nPress any key to exit..." },
 		}, true, {})
 		vim.fn.getchar()
@@ -17,29 +17,29 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Setup lazy.nvim
 require("lazy").setup({
-	require 'plugins.window.noice',
-	require 'plugins.window.neo-tree',
-	require 'plugins.window.snacks',
-	require 'plugins.window.bufferline',
-	require 'plugins.window.lualine',
-	require 'plugins.window.greeter',
+	require("plugins.window.noice"),
+	require("plugins.window.neo-tree"),
+	require("plugins.window.snacks"),
+	require("plugins.window.bufferline"),
+	require("plugins.window.lualine"),
+	require("plugins.window.greeter"),
 
 	--require "plugins.colortheme.onedark-olimorris",
 	--require "plugins.colortheme.onedark-navarasu",
-	require "plugins.colortheme.nord-shaunsingh",
+	require("plugins.colortheme.nord-shaunsingh"),
 
-	require 'plugins.workflow.treesitter',
-	require 'plugins.workflow.telescope',
-	require 'plugins.workflow.lsp',
-	require 'plugins.workflow.completion',
-	require 'plugins.workflow.zen-mode',
-	require 'plugins.workflow.conform',
+	require("plugins.workflow.treesitter"),
+	require("plugins.workflow.telescope"),
+	require("plugins.workflow.lsp"),
+	require("plugins.workflow.completion"),
+	require("plugins.workflow.zen-mode"),
+	require("plugins.workflow.conform"),
 
-	require 'plugins.language.tex',
-	require 'plugins.language.markdown',
+	require("plugins.language.tex"),
+	require("plugins.language.markdown"),
 
-	require 'plugins.utils.markdown-preview',
-	require 'plugins.utils.img-clip',
+	require("plugins.utils.markdown-preview"),
+	require("plugins.utils.img-clip"),
 
 	-- Configure any other settings here. See the documentation for more details.
 	-- colorscheme that will be used when installing plugins.

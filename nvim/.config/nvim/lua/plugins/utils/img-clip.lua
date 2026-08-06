@@ -3,7 +3,7 @@ return {
 	event = "VeryLazy",
 	opts = {
 		default = {
-			dir_path = "attachmnets",
+			dir_path = "attachments",
 			relative_to_current_file = true,
 			use_absolute_path = false,
 			file_name = "%Y-%m-%d-%H-%M-%S",

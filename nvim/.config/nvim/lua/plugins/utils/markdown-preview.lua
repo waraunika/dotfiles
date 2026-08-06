@@ -2,7 +2,7 @@ return {
 	"iamcco/markdown-preview.nvim",
 	cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
 	ft = { "markdown" },
-	build = "cd app && yarn install && yarn add tslib",
+	build = "cd app && npm install",
 
 	init = function()
 		-- enable only on md and txt files
@@ -41,7 +41,7 @@ return {
 	end,
 
 	keys = {
-		{ "<C-p>", "<cmd>MarkdownPreview<cr>",     ft = "markdown", remap = true, desc = "Start Markdown preview" },
+		{ "<C-p>", "<cmd>MarkdownPreview<cr>", ft = "markdown", remap = true, desc = "Start Markdown preview" },
 		{ "<C-p>", "<cmd>MarkdownPreviewStop<cr>", ft = "markdown", remap = true, desc = "Stop Markdown preview" },
-	}
+	},
 }
