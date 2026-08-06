@@ -16,7 +16,7 @@ return {
 					"-pdf",
 					"-interaction=nonstopmode",
 					"-synctex=1",
-				}
+				},
 			}
 
 			vim.g.vimtex_view_automatic = 1

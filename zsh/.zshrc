@@ -93,7 +93,7 @@ alias ls='exa --icons -la'
 alias wifi="nmcli dev wifi"
 alias wr='nmcli dev wifi connect "Red Roc"'
 alias ws='nmcli dev wifi connect "slowly"'
-alias wr='nmcli dev wifi connect "PC_ELEXCOMP"'
+alias wp='nmcli dev wifi connect "PC_ELEXCOMP"'
 
 alias disconnect="nmcli connection down id"
 
