@@ -4,3 +4,4 @@ return {
     {{name}} = "0xff{{value.default.hex_stripped}}",
 <* endfor *>
 }
+

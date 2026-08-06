@@ -290,7 +290,7 @@
 			"title<.*messenger.*>": " ",
 			"title<.*facebook.*>": " ",
 			"title<.*Discord.*>": " ",
-			"title<.*instagram.*>": " ",
+			"title<.*instagram.*>": "  ",
 			"title<.*ChatGPT.*>": "󰚩 ",
 			"title<.*deepseek.*>": "󰈺 ",
 			"title<.*qwen.*>": "󰚩 ",

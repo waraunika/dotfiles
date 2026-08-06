@@ -57,10 +57,10 @@ tooltip label {
 
 #workspaces {
 	margin-right: 4px;
-	border: 1px solid @source;
+	border: 1px;
 	border-radius: 10px;
 
-	padding: 4px 2px;
+	padding: 0px 0px;
 
 	background: alpha(@on_primary2, 0.1);
 }
