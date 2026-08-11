@@ -18,6 +18,7 @@ return {
 				"lua_ls",
 				"texlab",
 				"marksman",
+				"verible",
 			},
 		},
 	},
@@ -40,6 +41,7 @@ return {
 				"lua_ls",
 				"texlab",
 				"marksman",
+				"verible",
 			}
 
 			for _, server in ipairs(servers) do

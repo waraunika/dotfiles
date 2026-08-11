@@ -1,3 +1,12 @@
+[config.custom_colors]
+red = { color = "#e08c75", blend = false }
+orange = { color = "#d19a66", blend = false }
+yellow = { color = "#e5c07b", blend = false }
+green = { color = "#98c379", blend = false }
+aqua = { color = "#56b6c2", blend = false }
+blue = { color = "#61afef", blend = false }
+purple = { color = "#c678dd", blend = false }
+
 [config]
 [templates.hyprland]
 input_path = '~/.config/matugen/templates/hyprland-colors.lua'
@@ -27,4 +36,9 @@ post_hook = ''
 [templates.yazi]
 input_path = '~/.config/matugen/templates/yazi-theme.toml'
 output_path = '~/.config/yazi/theme.toml'
+post_hook = ''
+
+[templates.swaync]
+input_path = '~/.config/matugen/templates/swaync.css'
+output_path = '~/.config/swaync/colors.css'
 post_hook = ''

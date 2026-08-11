@@ -13,80 +13,80 @@ return {
 			enabled = true,
 			view = "cmdline_popup", -- floating popup instead of the bottom bar
 			format = {
-				cmdline     = { icon = ">" },
+				cmdline = { icon = ">" },
 				search_down = { icon = " " },
-				search_up   = { icon = " " },
-				filter      = { icon = "$" },
-				lua         = { icon = "☾" },
-				help        = { icon = "?" },
+				search_up = { icon = " " },
+				filter = { icon = "$" },
+				lua = { icon = "☾" },
+				help = { icon = "?" },
 			},
 		},
 
 		messages = {
-			enabled      = true,
-			view         = "notify", -- route short messages → toast
-			view_error   = "notify",
-			view_warn    = "notify",
-			view_history = "messages",    -- :messages still works
-			view_search  = "virtualtext", -- search count shown inline, not in a popup
+			enabled = true,
+			view = "notify", -- route short messages → toast
+			view_error = "notify",
+			view_warn = "notify",
+			view_history = "messages", -- :messages still works
+			view_search = "virtualtext", -- search count shown inline, not in a popup
 		},
 
 		lsp = {
-			progress  = {
+			progress = {
 				enabled = true,
 				-- Shows LSP/compile progress (latexmk, etc.) as a small bubble
 				view = "mini",
 			},
-			override  = {
+			override = {
 				["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-				["vim.lsp.util.stylize_markdown"]                = true,
-				["cmp.entry.get_documentation"]                  = true,
+				["vim.lsp.util.stylize_markdown"] = true,
+				["cmp.entry.get_documentation"] = true,
 			},
-			hover     = { enabled = true },
+			hover = { enabled = true },
 			signature = { enabled = true },
-			message   = { enabled = true, view = "notify" },
+			message = { enabled = true, view = "notify" },
 		},
 
 		popupmenu = {
 			enabled = true,
-			backend = "nui",  -- nui renders it; swap to "cmp" if you add nvim-cmp later
+			backend = "nui", -- nui renders it; swap to "cmp" if you add nvim-cmp later
 		},
 
 		presets = {
-			bottom_search         = true, -- classic /search bar at the bottom
-			command_palette       = true, -- :cmd + completion in one centered popup
+			bottom_search = true, -- classic /search bar at the bottom
+			command_palette = true, -- :cmd + completion in one centered popup
 			long_message_to_split = true, -- long messages go to a split, not a popup
-			inc_rename            = false, -- enable if you add inc-rename.nvim
-			lsp_doc_border        = true, -- border on hover/signature popups
+			inc_rename = false, -- enable if you add inc-rename.nvim
+			lsp_doc_border = true, -- border on hover/signature popups
 		},
 
 		routes = {
 			-- "written" file save notification → mini view (tiny, auto-dismisses)
 			{
 				filter = { event = "msg_show", kind = "", find = "written" },
-				opts   = { skip = false },
-				view   = "mini",
+				opts = { skip = false },
+				view = "mini",
 			},
 			-- Hide the "search hit BOTTOM" wraparound message
 			{
 				filter = { event = "msg_show", find = "search hit" },
-				opts   = { skip = true },
+				opts = { skip = true },
 			},
 			-- Suppress the "No more valid diagnostics to move to" message
 			{
 				filter = { event = "msg_show", find = "No more valid" },
-				opts   = { skip = true },
+				opts = { skip = true },
 			},
 		},
 
 		views = {
 			notify = {
-				merge   = false, -- don't stack same-message toasts
+				merge = false, -- don't stack same-message toasts
 				replace = false,
 			},
 			mini = {
 				win_options = { winblend = 0 },
-				timeout     = 500, -- auto-dismiss after 2 s
+				timeout = 200, -- auto-dismiss after 2 s
 			},
 		},
 	},
@@ -102,38 +102,48 @@ return {
 	keys = {
 		{
 			"<leader>nd",
-			function() require("noice").cmd("dismiss") end,
-			desc = "Dismiss all notifications"
+			function()
+				require("noice").cmd("dismiss")
+			end,
+			desc = "Dismiss all notifications",
 		},
 		{
 			"<leader>nl",
-			function() require("noice").cmd("last") end,
-			desc = "Show last notification"
+			function()
+				require("noice").cmd("last")
+			end,
+			desc = "Show last notification",
 		},
 		{
 			"<leader>nh",
-			function() require("noice").cmd("history") end,
-			desc = "Notification history"
+			function()
+				require("noice").cmd("history")
+			end,
+			desc = "Notification history",
 		},
 		{
 			"<C-f>",
 			function()
-				if not require("noice.lsp").scroll(4) then return "<C-f>" end
+				if not require("noice.lsp").scroll(4) then
+					return "<C-f>"
+				end
 			end,
 			silent = true,
 			expr = true,
 			desc = "Scroll noice popup down",
-			mode = { "i", "n", "s" }
+			mode = { "i", "n", "s" },
 		},
 		{
 			"<C-b>",
 			function()
-				if not require("noice.lsp").scroll(-4) then return "<C-b>" end
+				if not require("noice.lsp").scroll(-4) then
+					return "<C-b>"
+				end
 			end,
 			silent = true,
 			expr = true,
 			desc = "Scroll noice popup up",
-			mode = { "i", "n", "s" }
+			mode = { "i", "n", "s" },
 		},
 	},
 }

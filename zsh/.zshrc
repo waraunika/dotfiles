@@ -87,6 +87,7 @@ source $ZSH/oh-my-zsh.sh
 
 alias y='yay -Syu --needed'
 alias p='sudo pacman -Syu --needed'
+alias pclean='pacman -Qdtq | sudo pacman -Rns -'
 
 alias ls='exa --icons -la'
 
@@ -94,6 +95,7 @@ alias wifi="nmcli dev wifi"
 alias wr='nmcli dev wifi connect "Red Roc"'
 alias ws='nmcli dev wifi connect "slowly"'
 alias wp='nmcli dev wifi connect "PC_ELEXCOMP"'
+alias wc='nmcli dev wifi connect "CIT AP2"'
 
 alias disconnect="nmcli connection down id"
 

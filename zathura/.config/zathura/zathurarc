@@ -8,4 +8,3 @@ set statusbar-bg "#3b4252"
 set completion-bg "#696901"
 set inputbar-bg "#3b4252"
 
-set scroll-page-aware "true"

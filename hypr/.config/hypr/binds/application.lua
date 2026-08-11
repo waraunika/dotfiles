@@ -4,19 +4,35 @@ local mainMod = vars.mods.mainMod
 local keymaps = {
 	-- format: { key, cmd, mods (that are optional)}
 	{ "Return", vars.apps.terminal },
-	{ "Return", "[float] kitty",                                                                               { vars.mods.priMod } },
-	{ "B",      vars.apps.browser },
-	{ "D",      "vesktop" },
-	{ "E",      vars.apps.fileManager },
-	{ "E",      vars.apps.fileManager1,                                                                        { vars.mods.priMod } },
-	{ "E",      vars.apps.fileManager2,                                                                        { vars.mods.secMod } },
-	{ "O",      "obsidian" },
-	{ "S",      "prime-run steam" },
-	{ "V",      "codium" },
-	{ "W",      "whatsie" },
-	{ "Y",      vars.apps.browser .. " youtube.com" },
-	{ "Z",      "sioyek" },
-	{ "M",      "command -v hyprshutdown > /dev/null 2&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'", { vars.mods.priMod, vars.mods.secMod } },
+	{
+		"Return",
+		"[float] kitty",
+		{ vars.mods.priMod },
+	},
+	{ "B", vars.apps.browser },
+	{ "D", "vesktop" },
+	{ "E", vars.apps.fileManager },
+	{
+		"E",
+		vars.apps.fileManager1,
+		{ vars.mods.priMod },
+	},
+	{
+		"E",
+		vars.apps.fileManager2,
+		{ vars.mods.secMod },
+	},
+	{ "O", "obsidian" },
+	{ "S", "prime-run steam" },
+	{ "V", "codium" },
+	{ "W", "whatsie" },
+	{ "Y", vars.apps.browser .. " youtube.com" },
+	{ "Z", "zathura" },
+	{
+		"M",
+		"command -v hyprshutdown > /dev/null 2&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'",
+		{ vars.mods.priMod, vars.mods.secMod },
+	},
 }
 
 for _, map in ipairs(keymaps) do

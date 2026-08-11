@@ -1,0 +1,24 @@
+@define-color bg0 {{ colors.surface.dark.hex }};
+@define-color bg1 {{ colors.surface.dark.hex | set_lightness: 10 }};
+@define-color bg2 {{ colors.surface.dark.hex | set_lightness: 20 }};
+@define-color bg3 {{ colors.surface.dark.hex | set_lightness: 25 }};
+@define-color bg4 {{ colors.surface.dark.hex | set_lightness : 30 }};
+@define-color fg {{ colors.on_surface.dark.hex }};
+
+/* Fixed custom colors for the specific accent palette */
+@define-color red {{ colors.red.dark.hex }};
+@define-color orange {{ colors.orange.dark.hex }};
+@define-color yellow {{ colors.yellow.dark.hex }};
+@define-color green {{ colors.green.dark.hex }};
+@define-color aqua {{ colors.aqua.dark.hex }};
+@define-color blue {{ colors.blue.dark.hex }};
+@define-color purple {{ colors.purple.dark.hex }};
+
+/* Additional colors */
+@define-color grey0 #5c6370;
+@define-color gray1 #828997;
+@define-color gray2 #abb2bf;
+
+@define-color primary {{ colors.primary.dark.hex | set_lightness: 59 | set_saturation: 69 }};
+
+/* targeting #df6b50*/
