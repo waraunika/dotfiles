@@ -4,13 +4,9 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("waybar")
 	hl.exec_cmd("swaync")
 	hl.exec_cmd("awww-daemon")
-	hl.exec_cmd("awww img ~/Pictures/Wallpapers/Nord/mountains.jpg")
 	-- hl.exec_cmd("hyprlauncher")
 	hl.exec_cmd("hyprsunset")
 	hl.exec_cmd("hypridle")
 
 	-- custom apps
-	hl.exec_cmd("vesktop")
-	hl.exec_cmd("thunderbird")
-	hl.exec_cmd("whatsie")
 end)

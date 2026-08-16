@@ -36,9 +36,19 @@ post_hook = ''
 [templates.yazi]
 input_path = '~/.config/matugen/templates/yazi-theme.toml'
 output_path = '~/.config/yazi/theme.toml'
-post_hook = ''
+post_hook = 'yazi --clear-cache'
 
 [templates.swaync]
 input_path = '~/.config/matugen/templates/swaync.css'
 output_path = '~/.config/swaync/colors.css'
+post_hook = ''
+
+[templates.kitty]
+input_path = '~/.config/matugen/templates/kitty-colors.conf'
+output_path = '~/.config/kitty/colors.conf'
+post_hook = 'kitty @ set-colors -a ~/.config/kitty/colors.conf 2>/dev/null || true'
+
+[templates.p10k_colors]
+input_path = '~/.config/matugen/templates/p10k-colors.zsh'
+output_path = '~/.p10k-colors.zsh'
 post_hook = ''

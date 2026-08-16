@@ -89,6 +89,7 @@ alias y='yay -Syu --needed'
 alias p='sudo pacman -Syu --needed'
 alias pclean='pacman -Qdtq | sudo pacman -Rns -'
 
+
 alias ls='exa --icons -la'
 
 alias wifi="nmcli dev wifi"
@@ -187,6 +188,10 @@ export EDITOR="neovim"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# Matugen-generated p10k accent colors — must be sourced before ~/.p10k.zsh,
+# since it references $P10K_COLOR_* variables defined here.
+[[ ! -f ~/.p10k-colors.zsh ]] || source ~/.p10k-colors.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

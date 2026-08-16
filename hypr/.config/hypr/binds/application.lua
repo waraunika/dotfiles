@@ -26,8 +26,9 @@ local keymaps = {
 	{ "S", "prime-run steam" },
 	{ "V", "codium" },
 	{ "W", "whatsie" },
+	{ "X", "sioyek --new-instance" },
 	{ "Y", vars.apps.browser .. " youtube.com" },
-	{ "Z", "zathura" },
+	{ "Z", "GSK_RENDERER=cairo zathura" },
 	{
 		"M",
 		"command -v hyprshutdown > /dev/null 2&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'",

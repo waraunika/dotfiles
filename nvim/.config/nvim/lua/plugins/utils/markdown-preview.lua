@@ -17,7 +17,8 @@ return {
 
 		-- each markdown file in its own type
 		vim.g.mkdp_combine_preview = 0
-		vim.g.mkdp_auto_close = 1
+		vim.g.mkdp_auto_close = 0
+		vim.g.mkdp_auto_start = 1
 
 		-- enable KaTeX, Mermaid, PlantUML, sequence + flowchart
 		vim.g.mkdp_preview_options = {
@@ -39,9 +40,4 @@ return {
 		-- refresh lag on 100 ms
 		vim.opt.updatetime = 100
 	end,
-
-	keys = {
-		{ "<C-p>", "<cmd>MarkdownPreview<cr>", ft = "markdown", remap = true, desc = "Start Markdown preview" },
-		{ "<C-p>", "<cmd>MarkdownPreviewStop<cr>", ft = "markdown", remap = true, desc = "Stop Markdown preview" },
-	},
 }

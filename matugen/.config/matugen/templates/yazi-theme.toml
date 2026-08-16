@@ -1,3 +1,6 @@
+[flavor]
+dark = "dimidium"
+
 [mgr]
 cwd = { fg = "{{colors.primary.dark.hex}}" }
 
@@ -33,7 +36,7 @@ separator_close = ""
 bg = { bg = "{{colors.surface.dark.hex}}" }
 
 # Individual status elements - these control the bottom bar text
-mode_style      = { fg = "{{colors.primary.dark.hex}}" }
+mode_style      = { fg = "{{colors.primary.dark.hex | set_lightness: 40}}" }
 perm_style      = { fg = "{{colors.on_surface_variant.dark.hex}}" }
 size_style      = { fg = "{{colors.on_surface.dark.hex}}" }
 date_style      = { fg = "{{colors.on_surface_variant.dark.hex}}" }
@@ -44,14 +47,15 @@ progress_label  = { bold = true }
 progress_normal = { fg = "{{colors.primary.dark.hex}}", bg = "{{colors.surface.dark.hex}}" }
 progress_error  = { fg = "{{colors.error.dark.hex}}", bg = "{{colors.surface.dark.hex}}" }
 
-mode_normal_main = { fg = "{{colors.on_primary.dark.hex}}", bg = "{{colors.primary.dark.hex}}", bold = true }
-mode_normal_alt  = { fg = "{{colors.primary.dark.hex}}", bg = "{{colors.surface_container.dark.hex}}" }
+[mode]
+normal_main = { fg = "{{colors.on_primary.dark.hex}}", bg = "{{colors.primary.dark.hex | set_lightness: 50}}", bold = true }
+normal_alt  = { fg = "{{colors.primary.dark.hex}}", bg = "{{colors.surface_container.dark.hex | set_lightness: 50}}" }
 
-mode_select_main = { fg = "{{colors.on_secondary.dark.hex}}", bg = "{{colors.secondary.dark.hex}}", bold = true }
-mode_select_alt  = { fg = "{{colors.secondary.dark.hex}}", bg = "{{colors.surface_container.dark.hex}}" }
+select_main = { fg = "{{colors.on_secondary.dark.hex}}", bg = "{{colors.secondary.dark.hex}}", bold = true }
+select_alt  = { fg = "{{colors.secondary.dark.hex}}", bg = "{{colors.surface_container.dark.hex}}" }
 
-mode_unset_main = { fg = "{{colors.on_tertiary.dark.hex}}", bg = "{{colors.tertiary.dark.hex}}", bold = true }
-mode_unset_alt  = { fg = "{{colors.tertiary.dark.hex}}", bg = "{{colors.surface_container.dark.hex}}" }
+unset_main = { fg = "{{colors.on_tertiary.dark.hex}}", bg = "{{colors.tertiary.dark.hex}}", bold = true }
+unset_alt  = { fg = "{{colors.tertiary.dark.hex}}", bg = "{{colors.surface_container.dark.hex}}" }
 
 [input]
 border   = { fg = "{{colors.primary.dark.hex}}" }
@@ -97,4 +101,3 @@ rules = [
   { mime = "application/x-7z-compressed", fg = "{{colors.error.dark.hex}}" },
   { mime = "application/x-rar", fg = "{{colors.error.dark.hex}}" },
 ]
-
