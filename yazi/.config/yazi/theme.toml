@@ -1,55 +1,23 @@
 [mgr]
 cwd = { fg = "#ffb3ac" }
-
-hovered         = { fg = "#ffdad6", bg = "#73332f" }
-preview_hovered = { underline = true }
-
 find_keyword  = { fg = "#e1c38c", bold = true }
 find_position = { fg = "#e7bdb8", bg = "reset", bold = true }
-
 marker_copied   = { fg = "#e1c38c", bg = "#e1c38c" }
 marker_cut      = { fg = "#ffb4ab", bg = "#ffb4ab" }
 marker_marked   = { fg = "#ffb3ac", bg = "#ffb3ac" }
 marker_selected = { fg = "#e7bdb8", bg = "#e7bdb8" }
-
 count_copied   = { fg = "#402d04", bg = "#e1c38c" }
-count_cut      = { fg = "#690005", bg = "#ffb4ab" }
-count_selected = { fg = "#442927", bg = "#e7bdb8" }
-
-[tabs]
-tab_active   = { fg = "#571e1a", bg = "#ffb3ac" }
-tab_inactive = { fg = "#f1dedc", bg = "#271d1c" }
-tab_width    = 1
-
-[indicator]
-parent = { reversed = true }
-current = { reversed = true }
-
 border_symbol = "│"
 border_style  = { fg = "#a08c8a" }
+syntect_theme = "~/.config/yazi/tm-themes/Monokai Dark Soda.tmTheme"
 
-syntect_theme = ""
+[indicator]
+parent = { fg = "#e7bdb8", bg="#a11c12"}
+current = { fg = "#ffd0cc", bg="#c4443b", bold = true}
 
-[status]
-overall = {}
-perm_type  = { fg = "#60B442" }
-perm_read  = { fg = "#DB9C11" }
-perm_write = { fg = "#CF494C" }
-perm_exec  = { fg = "#1DB6BB" }
-perm_sep   = { fg = "#817E7E" }
-# Status bar background
-bg = { bg = "#1a1110" }
-
-# Individual status elements - these control the bottom bar text
-mode_style      = { fg = "#cc1100" }
-size_style      = { fg = "#f1dedc" }
-date_style      = { fg = "#d8c2bf" }
-sels_style      = { fg = "#ffb3ac" }
-separator_style = { fg = "#a08c8a" }
-
-progress_label  = { bold = true }
-progress_normal = { fg = "#ffb3ac", bg = "#1a1110" }
-progress_error  = { fg = "#ffb4ab", bg = "#1a1110" }
+[tab]
+active   = { fg = "#ffb3ac", bg = "#571e1a" }
+inactive = { fg = "#e7bdb8", bg = "#442927" }
 
 [mode]
 normal_main = { fg = "#571e1a", bg = "#ff1600", bold = true }
@@ -61,6 +29,28 @@ select_alt  = { fg = "#e7bdb8", bg = "#271d1c" }
 unset_main = { fg = "#402d04", bg = "#e1c38c", bold = true }
 unset_alt  = { fg = "#e1c38c", bg = "#271d1c" }
 
+[status]
+
+# Status bar background
+bg = { bg = "#1a1110" }
+
+# Individual status elements - these control the bottom bar text
+style      = { fg = "#cc1100" }
+size_style      = { fg = "#f1dedc" }
+date_style      = { fg = "#d8c2bf" }
+sels_style      = { fg = "#ffb3ac" }
+separator_style = { fg = "#a08c8a" }
+
+progress_label  = { bold = true }
+progress_normal = { fg = "#ffb3ac", bg = "#1a1110" }
+progress_error  = { fg = "#ffb4ab", bg = "#1a1110" }
+
+
+count_cut      = { fg = "#690005", bg = "#ffb4ab" }
+count_selected = { fg = "#442927", bg = "#e7bdb8" }
+
+hovered         = { fg = "#ffdad6", bg = "#73332f" }
+preview_hovered = { underline = true }
 [input]
 border   = { fg = "#ffb3ac" }
 title    = {}
@@ -82,7 +72,6 @@ mask            = { bg = "#1a1110" }
 cand            = { fg = "#e1c38c" }
 rest            = { fg = "#a08c8a" }
 desc            = { fg = "#ffb3ac" }
-separator       = "  "
 separator_style = { fg = "#a08c8a" }
 
 [help]

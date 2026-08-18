@@ -52,3 +52,9 @@ post_hook = 'kitty @ set-colors -a ~/.config/kitty/colors.conf 2>/dev/null || tr
 input_path = '~/.config/matugen/templates/p10k-colors.zsh'
 output_path = '~/.p10k-colors.zsh'
 post_hook = ''
+
+[templates.sioyek]
+input_path = '~/.config/matugen/templates/sioyek-colors.config'
+output_path = '~/.config/sioyek/colors_theme.config.raw'
+post_hook = 'awk -f ~/.config/matugen/hooks/sioyek-decimalize.awk ~/.config/sioyek/colors_theme.config.raw > ~/.config/sioyek/prefs_user.config && rm ~/.config/sioyek/colors_theme.config.raw'
+
