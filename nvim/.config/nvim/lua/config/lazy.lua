@@ -34,6 +34,8 @@ require("lazy").setup({
 	require("plugins.workflow.completion"),
 	require("plugins.workflow.zen-mode"),
 	require("plugins.workflow.conform"),
+	require("plugins.workflow.autopairs"),
+	require("plugins.workflow.treesitter-context"),
 
 	require("plugins.language.tex"),
 	require("plugins.language.markdown"),

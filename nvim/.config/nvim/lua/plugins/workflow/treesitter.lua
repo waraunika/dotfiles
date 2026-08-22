@@ -28,6 +28,8 @@ return { -- Highlight, edit, and navigate code
 			"html",
 			"m",
 			"verilog",
+			"c",
+			"cpp",
 		},
 		-- Autoinstall languages that are not installed
 		auto_install = true,
