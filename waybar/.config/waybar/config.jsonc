@@ -42,7 +42,8 @@
 		},
 		"on-scroll-up": "brightnessctl set +1%",
 		"on-scroll-down": "brightnessctl set 1%-",
-		"on-click-right": "brightnessctl set 0"
+		"on-click-right": "brightnessctl set 0",
+		"on-click-left": "brightnessctl set 100%"
 	},
 	"battery": {
 		"interval": 5,
@@ -78,8 +79,7 @@
 		],
 		"format-time": "{H}h {M}min",
 		"tooltip": true,
-		"tooltip-format": "{timeTo} {power}w",
-		"on-click-middle": "$HOME/.config/hypr/scripts/ChangeBlur.sh"
+		"tooltip-format": "{timeTo} {power}w"
 	},
 	"clock": {
 		"interval": 1,
@@ -140,7 +140,7 @@
 	},
 	"custom/lock": {
 		"format": "󰌾",
-		"on-click": "$HOME/.config/hypr/scripts/LockScreen.sh",
+		"on-click": "hyprlock",
 		"tooltip": true,
 		"tooltip-format": "󰷛 Screen Lock"
 	},
@@ -158,7 +158,6 @@
 	"custom/power": {
 		"format": " ⏻ ",
 		"on-click": "wlogout --buttons-per-row 4",
-		"on-click-right": "$HOME/.config/hypr/scripts/ChangeBlur.sh",
 		"tooltip": true,
 		"tooltip-format": "Left Click: Logout Menu\nRight Click: Change Blur"
 	},
@@ -325,9 +324,10 @@
 			"class<libreoffice-startcenter>": "󰏆 ",
 			"class<libreoffice-calc>": " ",
 			"class<libreoffice-impress>": "󱎐 ",
+			"title<.*nvim.*>": " ",
+			"title<.*tm.*>": " ",
 			"title<.*nvim ~.*>": " ",
 			"title<.*vim.*>": " ",
-			"title<.*nvim.*>": " ",
 			"title<.*figma.*>": " ",
 			"title<.*jira.*>": " ",
 			"class<jetbrains-idea>": " ",
@@ -371,6 +371,7 @@
 		"format": "{}",
 		"min-length": 15,
 		"max-length": 36,
+		"height": 30,
 		"separate-outputs": true,
 		"offscreen-css": true,
 		"offscreen-css-text": "(inactive)",

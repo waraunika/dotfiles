@@ -5,8 +5,8 @@ return {
 		lazy = false,
 		ft = { "tex", "latex" },
 		init = function()
-			vim.g.vimtex_view_method = "zathura"
-			vim.g.vimtex_view_general_viewer = "zathura"
+			vim.g.vimtex_view_method = "sioyek"
+			vim.g.vimtex_view_general_viewer = "sioyek"
 			vim.g.vimtex_view_general_options = "--synctex-forward @line: @col:@pdf @pdf"
 
 			vim.g.vimtex_compiler_method = "latexmk"

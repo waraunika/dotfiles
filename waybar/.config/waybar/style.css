@@ -210,18 +210,26 @@ tooltip label {
 	border: 1px solid @base04;
 }
 
+#custom-power {
+	padding: 0px 2px;
+}
+
+#custom-lock {
+	padding: 0px 4px;
+}
+
 #idle_inhibitor,
 #tray,
 #window,
 #custom-swaync,
 #clock,
 #clock-calendar,
-#custom-swaync,
 #backlight,
 #conn,
 #audio,
 #battery,
 #mobo_drawer,
+#status,
 #mpris {
 	border: 1px solid @source;
 	border-radius: 10px;

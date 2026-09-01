@@ -5,12 +5,14 @@ vim.o.clipboard = "unnamedplus" -- Sync clipboard between OS and Neovim. (defaul
 
 vim.o.wrap = true -- Display lines as one long line (default: true)
 vim.o.linebreak = true -- Companion to wrap, don't split words (default: false)
+vim.o.showbreak = " "
 
 vim.o.mouse = "a" -- Enable mouse mode (default: '')
 
 vim.o.autoindent = true -- Copy indent from current line when starting new one (default: true)
 vim.o.breakindent = true -- Enable break indent (default: false)
 vim.o.smartindent = true -- Make indenting smarter again (default: false)
+vim.o.breakindentopt = "shift:1"
 
 vim.o.ignorecase = true -- Case-insensitive searching UNLESS \C or capital in search (default: false)
 vim.o.smartcase = true -- Smart case (default: false)

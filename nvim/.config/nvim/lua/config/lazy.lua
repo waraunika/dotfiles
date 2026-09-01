@@ -23,6 +23,7 @@ require("lazy").setup({
 	require("plugins.window.bufferline"),
 	require("plugins.window.lualine"),
 	require("plugins.window.greeter"),
+	require("plugins.window.indent-blankline"),
 
 	--require "plugins.colortheme.onedark-olimorris",
 	--require "plugins.colortheme.onedark-navarasu",
@@ -39,6 +40,7 @@ require("lazy").setup({
 
 	require("plugins.language.tex"),
 	require("plugins.language.markdown"),
+	-- require("plugins.language.python"),
 
 	require("plugins.utils.markdown-preview"),
 	require("plugins.utils.img-clip"),

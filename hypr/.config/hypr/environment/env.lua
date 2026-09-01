@@ -25,6 +25,8 @@ hl.env("QT_QPA_PLATFORM", "wayland;xcb")
 hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
 hl.env("QT_QPA_PLATFORMTHEME", "qtct")
 
--- nvidia
-hl.env("GBM_BACKEND", "nvidia-drm")
-hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
+-- gpu selection: force AMD iGPU as primary render/compositor GPU
+hl.env("AQ_DRM_DEVICES", "/dev/dri/card1:/dev/dri/card0")
+hl.env("WLR_DRM_DEVICES", "/dev/dri/card1:/dev/dri/card0")
+hl.env("LIBVA_DRIVER_NAME", "radeonsi")
+hl.env("__GLX_VENDOR_LIBRARY_NAME", "mesa")

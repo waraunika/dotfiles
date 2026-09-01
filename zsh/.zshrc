@@ -159,8 +159,8 @@ eval "$(zoxide init zsh)"
 
 
 # User configuration
-export VISUAL="neovim"
-export EDITOR="neovim"
+export VISUAL="nvim"
+export EDITOR="nvim"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -209,3 +209,8 @@ source "$HOME/.local/share/zinit/zinit.git/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
 ### End of Zinit's installer chunk
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/waraunika/.lmstudio/bin"
+# End of LM Studio CLI section
+
