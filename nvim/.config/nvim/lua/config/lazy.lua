@@ -39,6 +39,7 @@ require("lazy").setup({
 	require("plugins.workflow.treesitter-context"),
 
 	require("plugins.language.tex"),
+	require("plugins.language.php"),
 	require("plugins.language.markdown"),
 	-- require("plugins.language.python"),
 

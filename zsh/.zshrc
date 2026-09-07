@@ -89,6 +89,7 @@ alias y='yay -Syu --needed'
 alias p='sudo pacman -Syu --needed'
 alias pclean='pacman -Qdtq | sudo pacman -Rns -'
 
+alias serve='sudo ln -s $(pwd) /opt/lampp/htdocs/$(basename $(pwd)) && echo "Serving at http://localhost/$(basename $(pwd))"'
 
 alias ls='exa --icons -la'
 

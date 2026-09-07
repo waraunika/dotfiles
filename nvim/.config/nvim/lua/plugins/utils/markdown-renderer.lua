@@ -17,7 +17,6 @@ return {
 				position = "inline",
 				block = true,
 				highlight = "RenderMarkdownMath",
-				position = "center",
 			},
 			completions = {
 				lsp = { enabled = true },

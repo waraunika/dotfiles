@@ -19,6 +19,7 @@ require("looks.animation")
 
 require("environment.env")
 require("environment.window-rules")
+require("environment.workspace-rules")
 require("environment.permission")
 
 require("layout.layout")

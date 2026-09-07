@@ -32,7 +32,7 @@ hl.curve("linear", {
 hl.curve("almostLinear", {
 	type = "bezier",
 	points = {
-		{ 0.5,  0.5 },
+		{ 0.5, 0.5 },
 		{ 0.75, 1 },
 	},
 })
@@ -41,18 +41,16 @@ hl.curve("quick", {
 	type = "bezier",
 	points = {
 		{ 0.15, 0 },
-		{ 0.1,  1 },
+		{ 0.1, 1 },
 	},
 })
 
-hl.curve("easy",
-	{
-		type = "spring",
-		mass = 0.6,
-		stiffness = 150,
-		dampening = 15,
-	}
-)
+hl.curve("easy", {
+	type = "spring",
+	mass = 0.6,
+	stiffness = 150,
+	dampening = 15,
+})
 
 hl.animation({
 	leaf = "global",
