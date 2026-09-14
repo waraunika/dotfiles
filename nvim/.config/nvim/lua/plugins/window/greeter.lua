@@ -26,7 +26,7 @@ return {
 				dashboard.button("f", "󰈞  Find Files", "<cmd>Telescope find_files<CR>"),
 				dashboard.button("r", "  Recent Files", "<cmd>Telescope oldfiles<CR>"),
 				dashboard.button("c", "  Config", "<cmd>Telescope find_files cwd=~/.config/nvim<CR>"),
-				dashboard.button("u", "󰣿 Update", "<cmd>Lazy update<CR>"),
+				dashboard.button("u", "󰣿  Update", "<cmd>Lazy update<CR>"),
 				dashboard.button("q", "󰅚  Quit", "<cmd>qa<CR>"),
 			}
 
@@ -52,4 +52,3 @@ return {
 		end,
 	},
 }
-
