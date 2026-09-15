@@ -13,7 +13,7 @@ syntect_theme = "~/.config/yazi/tm-themes/Monokai Dark Soda.tmTheme"
 
 [indicator]
 parent = { fg = "{{colors.secondary.dark.hex}}", bg="{{colors.on_secondary.dark.hex | set_saturation: 80 | set_lightness: 35}}"}
-current = { fg = "{{colors.primary.dark.hex | set_lightness: 90}}", bg="{{colors.on_primary.dark.hex | set_lightness: 50}}", bold = true}
+current = { fg = "{{colors.primary.dark.hex | set_lightness: 90}}", bg="{{colors.on_primary.dark.hex | set_lightness: 30}}", bold = true}
 
 [tab]
 active   = { fg = "{{colors.primary.dark.hex}}", bg = "{{colors.on_primary.dark.hex}}" }

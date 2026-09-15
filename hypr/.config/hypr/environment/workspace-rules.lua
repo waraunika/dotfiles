@@ -1,17 +1,16 @@
-hl.workspace_rule({
-	workspace = "1",
-	monitor = "HDMI-A-1",
-	default = true,
-})
+local vars = require("binds.variables")
+local monitors = { vars.monitors.laptop, vars.monitors.external }
+local seen_default = {}
+local workspace_count = 10
 
-hl.workspace_rule({
-	workspace = "2",
-	monitor = "HDMI-A-1",
-	default = true,
-})
+for i = 1, workspace_count do
+	local monitor = monitors[((i - 1) % #monitors) + 1]
 
-hl.workspace_rule({
-	workspace = "3",
-	monitor = "HDMI-A-1",
-	default = true,
-})
+	hl.workspace_rule({
+		workspace = tostring(i),
+		monitor = monitor,
+		default = not seen_default[monitor],
+	})
+
+	seen_default[monitor] = true
+end

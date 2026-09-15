@@ -1,5 +1,5 @@
 return {
-    image = "/home/waraunika/dotfiles/background/Pictures/Wallpapers/Nord/mountains.jpg",
+    image = "/home/waraunika/dotfiles/background/Pictures/Wallpapers/green/br2.png",
 
     aqua = "0xff81d3de",
 
@@ -9,7 +9,7 @@ return {
 
     aqua_value = "0xff56b6c2",
 
-    background = "0xff111318",
+    background = "0xff0f1512",
 
     blue = "0xff9acbfa",
 
@@ -31,17 +31,17 @@ return {
 
     green_value = "0xff98c379",
 
-    inverse_on_surface = "0xff2e3036",
+    inverse_on_surface = "0xff2c322f",
 
-    inverse_primary = "0xff425e91",
+    inverse_primary = "0xff146b55",
 
-    inverse_surface = "0xffe2e2e9",
+    inverse_surface = "0xffdee4df",
 
     on_aqua = "0xff00363c",
 
     on_aqua_container = "0xff9df0fb",
 
-    on_background = "0xffe2e2e9",
+    on_background = "0xffdee4df",
 
     on_blue = "0xff003352",
 
@@ -59,13 +59,13 @@ return {
 
     on_orange_container = "0xffffdcbf",
 
-    on_primary = "0xff0d2f5f",
+    on_primary = "0xff00382b",
 
-    on_primary_container = "0xffd7e2ff",
+    on_primary_container = "0xffa3f2d6",
 
-    on_primary_fixed = "0xff001b3f",
+    on_primary_fixed = "0xff002118",
 
-    on_primary_fixed_variant = "0xff294677",
+    on_primary_fixed_variant = "0xff00513f",
 
     on_purple = "0xff462151",
 
@@ -75,25 +75,25 @@ return {
 
     on_red_container = "0xffffdbd1",
 
-    on_secondary = "0xff283041",
+    on_secondary = "0xff1e352d",
 
-    on_secondary_container = "0xffdae2f9",
+    on_secondary_container = "0xffcee9dd",
 
-    on_secondary_fixed = "0xff131c2c",
+    on_secondary_fixed = "0xff082018",
 
-    on_secondary_fixed_variant = "0xff3e4759",
+    on_secondary_fixed_variant = "0xff344c43",
 
-    on_surface = "0xffe2e2e9",
+    on_surface = "0xffdee4df",
 
-    on_surface_variant = "0xffc4c6d0",
+    on_surface_variant = "0xffbfc9c3",
 
-    on_tertiary = "0xff3f2844",
+    on_tertiary = "0xff0d3446",
 
-    on_tertiary_container = "0xfffad8fc",
+    on_tertiary_container = "0xffc4e8fe",
 
-    on_tertiary_fixed = "0xff29132e",
+    on_tertiary_fixed = "0xff001e2c",
 
-    on_tertiary_fixed_variant = "0xff573e5b",
+    on_tertiary_fixed_variant = "0xff274b5d",
 
     on_yellow = "0xff412d00",
 
@@ -107,17 +107,17 @@ return {
 
     orange_value = "0xffd19a66",
 
-    outline = "0xff8e9099",
+    outline = "0xff89938e",
 
-    outline_variant = "0xff44474e",
+    outline_variant = "0xff3f4945",
 
-    primary = "0xffabc7ff",
+    primary = "0xff88d6bb",
 
-    primary_container = "0xff294677",
+    primary_container = "0xff00513f",
 
-    primary_fixed = "0xffd7e2ff",
+    primary_fixed = "0xffa3f2d6",
 
-    primary_fixed_dim = "0xffabc7ff",
+    primary_fixed_dim = "0xff88d6bb",
 
     purple = "0xffe7b6f1",
 
@@ -137,45 +137,45 @@ return {
 
     scrim = "0xff000000",
 
-    secondary = "0xffbec6dc",
+    secondary = "0xffb2ccc1",
 
-    secondary_container = "0xff3e4759",
+    secondary_container = "0xff344c43",
 
-    secondary_fixed = "0xffdae2f9",
+    secondary_fixed = "0xffcee9dd",
 
-    secondary_fixed_dim = "0xffbec6dc",
+    secondary_fixed_dim = "0xffb2ccc1",
 
     shadow = "0xff000000",
 
-    source_color = "0xff747c8f",
+    source_color = "0xff5a9d87",
 
-    surface = "0xff111318",
+    surface = "0xff0f1512",
 
-    surface_bright = "0xff37393e",
+    surface_bright = "0xff343b38",
 
-    surface_container = "0xff1e2025",
+    surface_container = "0xff1b211e",
 
-    surface_container_high = "0xff282a2f",
+    surface_container_high = "0xff252b29",
 
-    surface_container_highest = "0xff33353a",
+    surface_container_highest = "0xff303633",
 
-    surface_container_low = "0xff1a1c20",
+    surface_container_low = "0xff171d1a",
 
-    surface_container_lowest = "0xff0c0e13",
+    surface_container_lowest = "0xff090f0d",
 
-    surface_dim = "0xff111318",
+    surface_dim = "0xff0f1512",
 
-    surface_tint = "0xffabc7ff",
+    surface_tint = "0xff88d6bb",
 
-    surface_variant = "0xff44474e",
+    surface_variant = "0xff3f4945",
 
-    tertiary = "0xffddbce0",
+    tertiary = "0xffa8cbe2",
 
-    tertiary_container = "0xff573e5b",
+    tertiary_container = "0xff274b5d",
 
-    tertiary_fixed = "0xfffad8fc",
+    tertiary_fixed = "0xffc4e8fe",
 
-    tertiary_fixed_dim = "0xffddbce0",
+    tertiary_fixed_dim = "0xffa8cbe2",
 
     yellow = "0xffecc06c",
 

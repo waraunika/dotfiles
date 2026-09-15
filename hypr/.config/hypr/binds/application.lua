@@ -9,19 +9,12 @@ local keymaps = {
 		"[float] kitty",
 		{ vars.mods.priMod },
 	},
+	{ "C", vars.apps.calendar },
 	{ "B", vars.apps.browser },
 	{ "D", "vesktop" },
 	{ "E", vars.apps.fileManager },
-	{
-		"E",
-		vars.apps.fileManager1,
-		{ vars.mods.priMod },
-	},
-	{
-		"E",
-		vars.apps.fileManager2,
-		{ vars.mods.secMod },
-	},
+	{ "E", vars.apps.fileManager1, { vars.mods.priMod } },
+	{ "E", vars.apps.fileManager2, { vars.mods.secMod } },
 	{ "O", "obsidian" },
 	{ "S", "prime-run steam" },
 	{ "V", "codium" },
@@ -51,3 +44,4 @@ end
 hl.bind(mainMod .. "+ S", hl.dsp.focus({ workspace = 9 }))
 hl.bind(mainMod .. "+ D", hl.dsp.focus({ workspace = 10 }))
 hl.bind(mainMod .. "+ W", hl.dsp.focus({ workspace = 10 }))
+hl.bind(mainMod .. "+ C", hl.dsp.focus({ workspace = 4 }))

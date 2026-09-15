@@ -1,91 +1,91 @@
 [mgr]
-cwd = { fg = "#abc7ff" }
-find_keyword  = { fg = "#ddbce0", bold = true }
-find_position = { fg = "#bec6dc", bg = "reset", bold = true }
-marker_copied   = { fg = "#ddbce0", bg = "#ddbce0" }
+cwd = { fg = "#88d6bb" }
+find_keyword  = { fg = "#a8cbe2", bold = true }
+find_position = { fg = "#b2ccc1", bg = "reset", bold = true }
+marker_copied   = { fg = "#a8cbe2", bg = "#a8cbe2" }
 marker_cut      = { fg = "#ffb4ab", bg = "#ffb4ab" }
-marker_marked   = { fg = "#abc7ff", bg = "#abc7ff" }
-marker_selected = { fg = "#bec6dc", bg = "#bec6dc" }
-count_copied   = { fg = "#3f2844", bg = "#ddbce0" }
+marker_marked   = { fg = "#88d6bb", bg = "#88d6bb" }
+marker_selected = { fg = "#b2ccc1", bg = "#b2ccc1" }
+count_copied   = { fg = "#0d3446", bg = "#a8cbe2" }
 border_symbol = "│"
-border_style  = { fg = "#8e9099" }
+border_style  = { fg = "#89938e" }
 syntect_theme = "~/.config/yazi/tm-themes/Monokai Dark Soda.tmTheme"
 
 [indicator]
-parent = { fg = "#bec6dc", bg="#1240a1"}
-current = { fg = "#ccddff", bg="#1f6fe0", bold = true}
+parent = { fg = "#b2ccc1", bg="#12a16f"}
+current = { fg = "#d9f2e9", bg="#009975", bold = true}
 
 [tab]
-active   = { fg = "#abc7ff", bg = "#0d2f5f" }
-inactive = { fg = "#bec6dc", bg = "#283041" }
+active   = { fg = "#88d6bb", bg = "#00382b" }
+inactive = { fg = "#b2ccc1", bg = "#1e352d" }
 
 [mode]
-normal_main = { fg = "#0d2f5f", bg = "#0055ff", bold = true }
-normal_alt  = { fg = "#abc7ff", bg = "#727a8d" }
+normal_main = { fg = "#00382b", bg = "#41be93", bold = true }
+normal_alt  = { fg = "#88d6bb", bg = "#738c7f" }
 
-select_main = { fg = "#283041", bg = "#bec6dc", bold = true }
-select_alt  = { fg = "#bec6dc", bg = "#1e2025" }
+select_main = { fg = "#1e352d", bg = "#b2ccc1", bold = true }
+select_alt  = { fg = "#b2ccc1", bg = "#1b211e" }
 
-unset_main = { fg = "#3f2844", bg = "#ddbce0", bold = true }
-unset_alt  = { fg = "#ddbce0", bg = "#1e2025" }
+unset_main = { fg = "#0d3446", bg = "#a8cbe2", bold = true }
+unset_alt  = { fg = "#a8cbe2", bg = "#1b211e" }
 
 [status]
 
 # Status bar background
-bg = { bg = "#111318" }
+bg = { bg = "#0f1512" }
 
 # Individual status elements - these control the bottom bar text
-style      = { fg = "#0044cc" }
-size_style      = { fg = "#e2e2e9" }
-date_style      = { fg = "#c4c6d0" }
-sels_style      = { fg = "#abc7ff" }
-separator_style = { fg = "#8e9099" }
+style      = { fg = "#349875" }
+size_style      = { fg = "#dee4df" }
+date_style      = { fg = "#bfc9c3" }
+sels_style      = { fg = "#88d6bb" }
+separator_style = { fg = "#89938e" }
 
 progress_label  = { bold = true }
-progress_normal = { fg = "#abc7ff", bg = "#111318" }
-progress_error  = { fg = "#ffb4ab", bg = "#111318" }
+progress_normal = { fg = "#88d6bb", bg = "#0f1512" }
+progress_error  = { fg = "#ffb4ab", bg = "#0f1512" }
 
 
 count_cut      = { fg = "#690005", bg = "#ffb4ab" }
-count_selected = { fg = "#283041", bg = "#bec6dc" }
+count_selected = { fg = "#1e352d", bg = "#b2ccc1" }
 
-hovered         = { fg = "#d7e2ff", bg = "#294677" }
+hovered         = { fg = "#a3f2d6", bg = "#00513f" }
 preview_hovered = { underline = true }
 [input]
-border   = { fg = "#abc7ff" }
+border   = { fg = "#88d6bb" }
 title    = {}
 value    = {}
 selected = { reversed = true }
 
 [select]
-border   = { fg = "#abc7ff" }
-active   = { fg = "#ddbce0" }
+border   = { fg = "#88d6bb" }
+active   = { fg = "#a8cbe2" }
 inactive = {}
 
 [tasks]
-border  = { fg = "#abc7ff" }
+border  = { fg = "#88d6bb" }
 title   = {}
 hovered = { underline = true }
 
 [which]
-mask            = { bg = "#111318" }
-cand            = { fg = "#ddbce0" }
-rest            = { fg = "#8e9099" }
-desc            = { fg = "#abc7ff" }
-separator_style = { fg = "#8e9099" }
+mask            = { bg = "#0f1512" }
+cand            = { fg = "#a8cbe2" }
+rest            = { fg = "#89938e" }
+desc            = { fg = "#88d6bb" }
+separator_style = { fg = "#89938e" }
 
 [help]
-on      = { fg = "#ddbce0" }
-run     = { fg = "#bec6dc" }
-desc    = { fg = "#e2e2e9" }
-hovered = { bg = "#1e2025", bold = true }
-footer  = { fg = "#e2e2e9", bg = "#111318" }
+on      = { fg = "#a8cbe2" }
+run     = { fg = "#b2ccc1" }
+desc    = { fg = "#dee4df" }
+hovered = { bg = "#1b211e", bold = true }
+footer  = { fg = "#dee4df", bg = "#0f1512" }
 
 [filetype]
 rules = [
-  { mime = "image/*", fg = "#ddbce0" },
-  { mime = "video/*", fg = "#abc7ff" },
-  { mime = "audio/*", fg = "#bec6dc" },
+  { mime = "image/*", fg = "#a8cbe2" },
+  { mime = "video/*", fg = "#88d6bb" },
+  { mime = "audio/*", fg = "#b2ccc1" },
   { mime = "application/zip", fg = "#ffb4ab" },
   { mime = "application/gzip", fg = "#ffb4ab" },
   { mime = "application/x-tar", fg = "#ffb4ab" },

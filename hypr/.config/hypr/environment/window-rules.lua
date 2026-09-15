@@ -134,9 +134,18 @@ hl.window_rule({
 })
 
 hl.window_rule({
+	name = "Thunderbird in 4th workspace spawn",
+	match = {
+		class = "org.mozilla.Thunderbird",
+	},
+
+	workspace = 4,
+})
+
+hl.window_rule({
 	name = "Whatsie in 10th workspace spawn",
 	match = {
-		class = "whatsie",
+		class = "com.ktechpit.whatsie",
 	},
 
 	workspace = 10,

@@ -2,7 +2,7 @@ return {
 	"iamcco/markdown-preview.nvim",
 	cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
 	ft = { "markdown" },
-	build = "cd app && npm install",
+	build = "cd app && yarn install",
 
 	init = function()
 		-- enable only on md and txt files

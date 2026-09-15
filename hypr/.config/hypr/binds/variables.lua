@@ -9,6 +9,7 @@ vars.apps = {
 	menu2 = ".config/rofi/launchers/type-1/launcher.sh",
 	browser = "firefox",
 	editor = "kitty nvim",
+	calendar = "thunderbird",
 }
 
 vars.mods = {
@@ -16,6 +17,11 @@ vars.mods = {
 	priMod = "CTRL",
 	secMod = "SHIFT",
 	scriptMod = "ALT",
+}
+
+vars.monitors = {
+	laptop = "eDP-1",
+	external = "HDMI-A-1",
 }
 
 return vars
