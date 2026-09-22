@@ -1,7 +1,3 @@
-local movefocus = function ()
-	hl.dsp.focus({ direction = "left" })
-end
-
 hl.gesture({
 	fingers = 3,
 	direction = "vertical",
@@ -11,22 +7,22 @@ hl.gesture({
 hl.gesture({
 	fingers = 3,
 	direction = "left",
-	action = function ()
+	action = function()
 		-- hl.notification.create({"hi", 200})qqqq
 		hl.dsp.focus({ direction = "left" })
-	end
+	end,
 })
 
 hl.config({
-  input = {
+	input = {
 		follow_mouse = 1,
 
 		sensitivity = 0, -- -1.0 - 1.0, 0 means no modification.
 
-    touchpad = {
+		touchpad = {
 			natural_scroll = true,
 		},
-  }
+	},
 })
 
 hl.device({

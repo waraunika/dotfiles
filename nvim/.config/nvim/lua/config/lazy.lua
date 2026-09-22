@@ -49,6 +49,7 @@ require("lazy").setup({
 	require("plugins.utils.img-clip"),
 	require("plugins.utils.markdown-renderer"),
 	require("plugins.utils.git"),
+	require("plugins.utils.image-cursor"),
 
 	-- Configure any other settings here. See the documentation for more details.
 	-- colorscheme that will be used when installing plugins.

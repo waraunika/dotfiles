@@ -4,7 +4,7 @@ local seen_default = {}
 local workspace_count = 10
 
 for i = 1, workspace_count do
-	local monitor = monitors[((i - 1) % #monitors) + 1]
+	local monitor = monitors[((i) % #monitors) + 1]
 
 	hl.workspace_rule({
 		workspace = tostring(i),

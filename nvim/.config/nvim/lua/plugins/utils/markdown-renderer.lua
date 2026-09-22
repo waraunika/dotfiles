@@ -14,7 +14,7 @@ return {
 				enabled = true,
 				converter = { "latex2text", "utftex" },
 				-- requires `pylatexenc` python package and `libtexprintf` package respectively
-				position = "inline",
+				position = "center",
 				block = true,
 				highlight = "RenderMarkdownMath",
 			},

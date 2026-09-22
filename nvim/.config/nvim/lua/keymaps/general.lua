@@ -1,82 +1,258 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+local keymaps = {
+	-- window navigation
+	{
+		{ "n", "v", "i" },
+		"<C-h>",
+		"<C-w>h",
+		"Go to left window",
+	},
+	{
+		{ "n", "v", "i" },
+		"<C-j>",
+		"<C-w>j",
+		"Go to upper window",
+	},
+	{
+		{ "n", "v", "i" },
+		"<C-k>",
+		"<C-w>k",
+		"Go to below window",
+	},
+	{
+		{ "n", "v", "i" },
+		"<C-l>",
+		"<C-w>l",
+		"Go to right window",
+	},
 
-local keymap = vim.keymap.set
-local opts = { noremap = true, silent = true }
+	-- Save file
+	{
+		{ "n", "i" },
+		"<C-s>",
+		"<cmd>w<CR>",
+		"Save file",
+	},
 
-keymap({ "n", "v", "i" }, "<C-h>", "<C-w>h", { desc = "Go to left window", silent = true })
-keymap({ "n", "v", "i" }, "<C-j>", "<C-w>j", { desc = "Go to lower window", silent = true })
-keymap({ "n", "v", "i" }, "<C-k>", "<C-w>k", { desc = "Go to upper window", silent = true })
-keymap({ "n", "v", "i" }, "<C-l>", "<C-w>l", { desc = "Go to right window", silent = true })
+	-- save file with no auto commands
+	{
+		"n",
+		"<A-s>",
+		"<cmd>noautocmd w<CR>",
+		"Save file without auto-formatting",
+	},
 
-keymap({ "n", "v" }, "<Space>", "<Nop>", { silent = true })
+	-- Shift + Tab to remove indentation
+	{
+		"n",
+		"<S-Tab>",
+		"<<",
+		"Remove indentation inline",
+	},
+	{
+		"i",
+		"<S-Tab>",
+		"<C-d>",
+		"Remove indentation inline",
+	},
+	{
+		"v",
+		"<S-Tab>",
+		"<gv",
+		"Remove indentation inline",
+	},
 
--- control s to save file
-keymap("n", "<C-s>", "<cmd> w <CR>", opts)
-keymap("i", "<C-s>", "<cmd> w <CR>", opts)
+	-- Quit file
+	{
+		{ "n", "i" },
+		"<C-q>",
+		"<cmd>q<CR>",
+		"Quit file",
+	},
 
--- Shift + Tab to remove indentation inline
-keymap("n", "<S-Tab>", "<<", opts)
-keymap("i", "<S-Tab>", "<C-d>", opts)
-keymap("v", "<S-Tab>", "<gv", opts)
+	-- Delete single character without copying
+	{
+		{ "n", "v" },
+		"x",
+		'"_x',
+		"Delete character without copying",
+	},
 
--- save file without auto formatting
-keymap("n", "<leader>sn", "<cmd>noautocmd w <CR>", opts)
+	-- Vertical scroll and center
+	{
+		"n",
+		"<C-d>",
+		"<C-d>zz",
+		"Scroll down and center",
+	},
+	{ "n", "<C-u>", "<C-u>zz", "Scroll up and center" },
 
--- quit file
-keymap("n", "<C-q>", "<cmd> q <CR>", opts)
+	-- Search navigation and center
+	{
+		"n",
+		"n",
+		"nzzzv",
+		"Next search result and center",
+	},
+	{
+		"n",
+		"N",
+		"Nzzzv",
+		"Previous search result and center",
+	},
 
--- delete single character without copying into register
-keymap("n", "x", '"_x', opts)
+	-- Window resizing
+	{
+		"n",
+		"<Up>",
+		":resize -2<CR>",
+		"Decrease window height",
+	},
+	{
+		"n",
+		"<Down>",
+		":resize +2<CR>",
+		"Increase window height",
+	},
+	{
+		"n",
+		"<Left>",
+		":vertical resize -2<CR>",
+		"Decrease window width",
+	},
+	{
+		"n",
+		"<Right>",
+		":vertical resize +2<CR>",
+		"Increase window width",
+	},
 
--- vertical scroll and center
-keymap("n", "<C-d>", "<C-d>>zz", opts)
-keymap("n", "<C-u>", "<C-u>>zz", opts)
+	-- Buffer management
+	{
+		{ "n", "i" },
+		"<leader><Tab>",
+		":bnext<CR>",
+		"Next buffer",
+	},
+	{
+		{ "n", "i" },
+		"<leader><S-Tab>",
+		":bprevious<CR>",
+		"Previous buffer",
+	},
+	{
+		"n",
+		"<C-w>",
+		":Bdelete!<CR>",
+		"Close buffer",
+	},
+	{
+		"n",
+		"<leader>b",
+		"<cmd>enew<CR>",
+		"Open new buffer",
+	},
 
-keymap("n", "n", "nzzzv", opts)
-keymap("n", "N", "Nzzzv", opts)
+	-- Window management
+	{
+		{ "n", "i" },
+		"<leader>v",
+		"<C-w>v",
+		"Split window vertically",
+	},
+	{
+		"n",
+		"<leader>h",
+		"<C-w>s",
+		"Split window horizontally",
+	},
+	{
+		"n",
+		"<leader>se",
+		"<C-w>=",
+		"Make split windows equal size",
+	},
+	{
+		"n",
+		"<leader>w",
+		":close<CR>",
+		"Close window",
+	},
 
-keymap("n", "<Up>", ":resize -2<CR>", opts)
-keymap("n", "<Down>", ":resize +2<CR>", opts)
-keymap("n", "<Left>", ":vertical resize -2<CR>", opts)
-keymap("n", "<Right>", ":vertical resize +2<CR>", opts)
+	-- Tab management
+	{
+		{ "n", "i" },
+		"<leader>to",
+		":tabnew<CR>",
+		"Open new tab",
+	},
+	{
+		"n",
+		"<leader>tw",
+		":tabclose<CR>",
+		"Close tab",
+	},
+	{
+		"n",
+		"<leader>tn",
+		":tabn<CR>",
+		"Next tab",
+	},
+	{
+		"n",
+		"<leader>tp",
+		":tabp<CR>",
+		"Previous tab",
+	},
 
--- buffer management
-keymap("n", "<leader><Tab>", ":bnext<CR>", opts)
-keymap("n", "<leader><S-Tab>", ":bprevious<CR>", opts)
-keymap("n", "<C-w>", ":Bdelete!<CR>", opts) -- close buffer
-keymap("n", "<leader>b", "<cmd> enew <CR>", opts) -- open buffer
+	-- Toggle line wrapping
+	{
+		{ "n", "i" },
+		"<leader>lw",
+		"<cmd>set wrap!<CR>",
+		"Toggle line wrap",
+	},
 
--- window management
-keymap("n", "<leader>v", "<C-w>v", opts) -- split vertically
-keymap("n", "<leader>h", "<C-w>s", opts) -- split horizontally
-keymap("n", "<leader>se", "<C-w>=", opts) -- make split windows equal in size
-keymap("n", "<leader>w", ":close<CR>", opts) -- close window
+	-- Stay in indent mode
+	{
+		"v",
+		"<",
+		"<gv",
+		"Indent left and reselect",
+	},
+	{
+		"v",
+		">",
+		">gv",
+		"Indent right and reselect",
+	},
 
--- tab management
-keymap("n", "<leader>to", ":tabnew<CR>", opts) -- new empty tab
-keymap("n", "<leader>tw", ":tabclose<CR>", opts) -- close tab
-keymap("n", "<leader>tn", ":tabn<CR>", opts) -- next tab
-keymap("n", "<leader>tp", ":tabp<CR>", opts) -- previous tab
+	-- Keep last yanked when pasting in visual mode
+	{
+		"v",
+		"p",
+		'"_dP',
+		"Paste without replacing register",
+	},
+	{
+		"n",
+		"]d",
+		function()
+			vim.diagnostic.config({
+				jump = {
+					on_jump = function()
+						vim.diagnostic.open_float()
+					end,
+				},
+			})
+		end,
+		"Open floating diagnostic message",
+	},
+	{
+		"n",
+		"<leader>q",
+		vim.diagnostic.setloclist,
+		"Open diagnostics list",
+	},
+}
 
--- toggle line wrapping
-keymap("n", "<leader>lw", "<cmd>set wrap!<CR>", opts)
-
--- stay in indent mode
-keymap("v", "<", "<gv", opts)
-keymap("v", ">", ">gv", opts)
-
--- keep last yanked when pasting
-keymap("v", "p", '"_dP', opts)
-
--- diagnostic keymaps
-keymap("n", "[d", function()
-	vim.diagnostic.jump({ count = -1, float = true })
-end, { desc = "Go to previous diagnostic message" })
-
-keymap("n", "]d", function()
-	vim.diagnostic.jump({ count = 1, float = true })
-end, { desc = "Go to next diagnostic message" })
-
-keymap("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
-keymap("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+return keymaps

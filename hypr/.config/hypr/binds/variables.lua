@@ -2,7 +2,7 @@ local vars = {}
 
 vars.apps = {
 	terminal = "kitty",
-	fileManager1 = "nemo",
+	fileManager1 = "pcmanfm",
 	fileManager2 = "nautilus",
 	fileManager = "kitty yazi",
 	menu = "hyprlauncher",
