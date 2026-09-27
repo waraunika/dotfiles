@@ -1,13 +1,11 @@
-local keymap = vim.keymap.set
-
-local snacks_keys = {
+local keymaps = {
 	{
 		"n",
 		"<leader>pf",
 		function()
 			Snacks.picker.files()
 		end,
-		desc = "[P]ick [F]iles",
+		"[P]ick [F]iles",
 	},
 	{
 		"n",
@@ -15,7 +13,7 @@ local snacks_keys = {
 		function()
 			Snacks.picker.grep()
 		end,
-		desc = "[P]ick [G]rep",
+		"[P]ick [G]rep",
 	},
 	{
 		"n",
@@ -23,7 +21,7 @@ local snacks_keys = {
 		function()
 			Snacks.picker.recent()
 		end,
-		desc = "[P]ick [R]ecent files",
+		"[P]ick [R]ecent files",
 	},
 	{
 		"n",
@@ -31,7 +29,7 @@ local snacks_keys = {
 		function()
 			Snacks.picker.buffers()
 		end,
-		desc = "[P]ick [B]uffers",
+		"[P]ick [B]uffers",
 	},
 	{
 		"n",
@@ -39,17 +37,16 @@ local snacks_keys = {
 		function()
 			Snacks.picker.lsp_symbols()
 		end,
-		desc = "[P]ick LSP [S]symbols",
+		"[P]ick LSP [S]symbols",
 	},
 	{
-		"n",
 		"n",
 		"<leader>p/",
 		function()
 			Snacks.picker.grep_buffers()
 		end,
-		desc = "[P]ick grep open buffers",
+		"[P]ick grep open buffers",
 	},
 }
 
-return keymap
+return keymaps

@@ -44,4 +44,29 @@ return { -- Highlight, edit, and navigate code
 	--    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
 	--    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
 	--    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+	{
+		"nvim-treesitter/nvim-treesitter-textobjects",
+		branch = "main",
+		dependencies = { "nvim-treesitter/nvim-treesitter" },
+		init = function()
+			vim.g.no_plugin_maps = true -- avoid built-in ftplugin mapping conflicts
+		end,
+		config = function()
+			vim.keymap.set({ "o" }, "ib", function()
+				require("nvim-treesitter-textobjects.select").select_textobject("@code_cell.inner", "textobjects")
+			end, { desc = "Inner code cell" })
+
+			vim.keymap.set({ "x", "o" }, "ab", function()
+				require("nvim-treesitter-textobjects.select").select_textobject("@code_cell.outer", "textobjects")
+			end, { desc = "Around code cell" })
+
+			vim.keymap.set({ "n", "x", "o" }, "]b", function()
+				require("nvim-treesitter-textobjects.move").goto_next_start("@code_cell.inner", "textobjects")
+			end, { desc = "Next code cell" })
+
+			vim.keymap.set({ "n", "x", "o" }, "[b", function()
+				require("nvim-treesitter-textobjects.move").goto_previous_start("@code_cell.inner", "textobjects")
+			end, { desc = "Previous code cell" })
+		end,
+	},
 }

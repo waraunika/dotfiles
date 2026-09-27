@@ -42,14 +42,16 @@ require("lazy").setup({
 	require("plugins.language.tex"),
 	require("plugins.language.php"),
 	require("plugins.language.vim-lua-lazydev"),
+	require("plugins.language.cpp"),
 	-- require("plugins.language.markdown"),
-	-- require("plugins.language.python"),
+	require("plugins.language.python"),
 
 	require("plugins.utils.markdown-preview"),
 	require("plugins.utils.img-clip"),
 	require("plugins.utils.markdown-renderer"),
 	require("plugins.utils.git"),
 	require("plugins.utils.image-cursor"),
+	require("plugins.utils.toggleterm"),
 
 	-- Configure any other settings here. See the documentation for more details.
 	-- colorscheme that will be used when installing plugins.

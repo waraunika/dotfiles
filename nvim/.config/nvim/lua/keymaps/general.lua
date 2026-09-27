@@ -2,25 +2,25 @@ local keymaps = {
 	-- window navigation
 	{
 		{ "n", "v", "i" },
-		"<C-h>",
+		"<A-h>",
 		"<C-w>h",
 		"Go to left window",
 	},
 	{
 		{ "n", "v", "i" },
-		"<C-j>",
+		"<A-j>",
 		"<C-w>j",
 		"Go to upper window",
 	},
 	{
 		{ "n", "v", "i" },
-		"<C-k>",
+		"<A-k>",
 		"<C-w>k",
 		"Go to below window",
 	},
 	{
 		{ "n", "v", "i" },
-		"<C-l>",
+		"<A-l>",
 		"<C-w>l",
 		"Go to right window",
 	},
@@ -126,35 +126,9 @@ local keymaps = {
 		"Increase window width",
 	},
 
-	-- Buffer management
-	{
-		{ "n", "i" },
-		"<leader><Tab>",
-		":bnext<CR>",
-		"Next buffer",
-	},
-	{
-		{ "n", "i" },
-		"<leader><S-Tab>",
-		":bprevious<CR>",
-		"Previous buffer",
-	},
-	{
-		"n",
-		"<C-w>",
-		":Bdelete!<CR>",
-		"Close buffer",
-	},
-	{
-		"n",
-		"<leader>b",
-		"<cmd>enew<CR>",
-		"Open new buffer",
-	},
-
 	-- Window management
 	{
-		{ "n", "i" },
+		{ "n" },
 		"<leader>v",
 		"<C-w>v",
 		"Split window vertically",
@@ -180,7 +154,7 @@ local keymaps = {
 
 	-- Tab management
 	{
-		{ "n", "i" },
+		{ "n" },
 		"<leader>to",
 		":tabnew<CR>",
 		"Open new tab",
@@ -206,7 +180,7 @@ local keymaps = {
 
 	-- Toggle line wrapping
 	{
-		{ "n", "i" },
+		{ "n" },
 		"<leader>lw",
 		"<cmd>set wrap!<CR>",
 		"Toggle line wrap",
@@ -237,13 +211,7 @@ local keymaps = {
 		"n",
 		"]d",
 		function()
-			vim.diagnostic.config({
-				jump = {
-					on_jump = function()
-						vim.diagnostic.open_float()
-					end,
-				},
-			})
+			vim.diagnostic.jump({ count = 1 })
 		end,
 		"Open floating diagnostic message",
 	},

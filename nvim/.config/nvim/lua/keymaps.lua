@@ -20,6 +20,7 @@ local modules = {
 	"keymaps.markdown",
 	"keymaps.neotree",
 	"keymaps.snacks",
+	"keymaps.bufferline",
 }
 
 for _, mod in ipairs(modules) do
@@ -31,3 +32,6 @@ for _, mod in ipairs(modules) do
 		end
 	end
 end
+
+map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Keep j word-wrapped" })
+map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Keep j word-wrapped" })

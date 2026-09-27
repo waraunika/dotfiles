@@ -1,4 +1,4 @@
-keymaps = {
+local keymaps = {
 	{
 		"n",
 		"<leader>ngs",
@@ -11,12 +11,6 @@ keymaps = {
 		"\\",
 		":Neotree reveal<CR>",
 		"Reveal file in explorer",
-	},
-	{
-		"n",
-		"<leader>ngs",
-		":Neotree float git_status<CR>",
-		"Neo-tree git status",
 	},
 }
 

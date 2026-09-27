@@ -12,8 +12,8 @@ return {
 		opts = {
 			latex = {
 				enabled = true,
-				converter = { "latex2text", "utftex" },
-				-- requires `pylatexenc` python package and `libtexprintf` package respectively
+				converter = { "utftex", "pylatexenc" },
+				-- requires `libtexprintf` package and `pylatexenc` python package respectively
 				position = "center",
 				block = true,
 				highlight = "RenderMarkdownMath",

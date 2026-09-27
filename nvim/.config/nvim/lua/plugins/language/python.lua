@@ -8,21 +8,16 @@ return {
 		version = "^1.0.0", -- pin to major version; breaking changes happen across majors
 		build = ":UpdateRemotePlugins",
 		dependencies = { "3rd/image.nvim" }, -- you already have this for plot/image output
-		cmd = {
-			"MoltenInit",
-			"MoltenEvaluateOperator",
-			"MoltenEvaluateLine",
-			"MoltenReevaluateCell",
-			"MoltenDelete",
-			"MoltenHideOutput",
-			"MoltenEvaluateVisual",
-		},
+		ft = { "python", "ipynb" },
 		init = function()
 			vim.g.molten_image_provider = "image.nvim"
 			vim.g.molten_output_win_max_height = 20
 			vim.g.molten_auto_open_output = true
 			vim.g.molten_wrap_output = true
 			vim.g.molten_virt_text_output = true -- shows a small virtual text marker under executed cells
+		end,
+		config = function()
+			vim.fn["remote#host#Require"]("python3")
 		end,
 		keys = {
 			{ "<leader>mi", "<cmd>MoltenInit<CR>", desc = "Initialize Molten kernel" },
@@ -36,7 +31,8 @@ return {
 	},
 	{
 		"GCBallesteros/jupytext.nvim",
-		ft = { "ipynb" },
+		event = "BufReadPre *.ipynb",
+		lazy = false,
 		opts = {
 			style = "markdown", -- or "percent" for `# %%` cell markers
 			output_extension = "md",

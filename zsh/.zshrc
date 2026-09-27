@@ -49,6 +49,14 @@ bindkey "$terminfo[kcbt]" menu-select
 bindkey -M menuselect '^I' menu-complete
 bindkey -M menuselect "$terminfo[kcbt]" reverse-menu-complete
 
+# Left/Right arrow for inline Navigation
+bindkey -M menuselect '^[[D' .backward-char # left arrow
+bindkey -M menuselect '^[[C' .forward-char # left arrow
+
+# for fixing delete character
+bindkey '^[[3~' delete-char
+bindkey '^[3;5~' delete-char
+
 # Personal configuration
 # -----------------------------------------------------------------------------
 source "$HOME/.zsh/.zsh_alias"
@@ -58,9 +66,11 @@ source "$HOME/.zsh/.zsh_functions"
 # -----------------------------------------------------------------------------
 [[ ! -f "$HOME/.p10k.zsh" ]] || source "$HOME/.p10k.zsh"
 
-# My script/source file in path
+# Exports for paths, and other setup
 # -----------------------------------------------------------------------------
 export PATH="$PATH:$HOME/scripts/"
+export VISUAL="nvim"
+export EDITOR="nvim"
 
 # Plugin at the end
 source "$HOME/src/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
