@@ -1,0 +1,145 @@
+#!/usr/bin/env zsh
+
+# Rest reminder toggle script
+# Usage: ./rest_reminder.zsh [on|off|toggle]
+
+# Configuration
+INTERVAL=1200  # 20 minutes in seconds
+REST=600
+PID_FILE="/tmp/rest_reminder.pid"
+START_TIME_FILE="/tmp/rest_reminder_start.time"
+
+# Function to start the reminder
+start_reminder() {
+    if [[ -f "$PID_FILE" ]] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
+        echo "Rest reminder is already running (PID: $(cat "$PID_FILE"))"
+        notify-send "Rest reminder is already running (PID: $(cat "$PID_FILE"))"
+        return 1
+    fi
+    
+    echo "Starting rest reminder (every 20 minutes)..."
+    notify-send "Starting rest reminder (every 20 minutes)..."
+    
+    # Save start time
+    date +%s > "$START_TIME_FILE"
+    
+    # Start the background process
+    (
+        while true; do
+            sleep "$INTERVAL"
+            notify-send "⏰ Time for a break!" "You've been working for 20 minutes. Take a short rest!" -u normal -t 5000
+            canberra-gtk-play -i bell 2>/dev/null || true
+						sleep "$BREAK"
+            notify-send "⏰ Start your work!" "You've been resting for 10 minutes now. Start working!!" -u normal -t 5000
+            canberra-gtk-play -i bell 2>/dev/null || true
+        done
+    ) & 
+    
+    # Save PID
+    echo "$!" > "$PID_FILE"
+    echo "Rest reminder started with PID: $!"
+}
+
+# Function to stop the reminder
+stop_reminder() {
+    if [[ -f "$PID_FILE" ]]; then
+        local pid="$(cat "$PID_FILE")"
+        if kill -0 "$pid" 2>/dev/null; then
+            kill "$pid"
+            echo "Rest reminder stopped (PID: $pid)"
+            notify-send "Rest reminder stopped (PID: $pid)"
+        else
+            notify-send "Rest reminder was not running"
+            echo "Rest reminder was not running"
+        fi
+        rm -f "$PID_FILE"
+        rm -f "$START_TIME_FILE" 2>/dev/null
+    else
+        notify-send "Rest reminder is not running"
+        echo "Rest reminder is not running"
+    fi
+}
+
+# Function to check status
+check_status() {
+    if [[ -f "$PID_FILE" ]] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
+        local current_time=$(date '+%H:%M:%S')
+        local current_epoch=$(date +%s)
+        
+        echo "✅ Rest reminder is RUNNING (PID: $(cat "$PID_FILE"))"
+        echo "   Current time: $current_time"
+        
+        # Show when it was started if available
+        if [[ -f "$START_TIME_FILE" ]]; then
+            local start_epoch=$(cat "$START_TIME_FILE")
+            local start_time=$(date -d "@$start_epoch" '+%H:%M:%S' 2>/dev/null || date -r "$start_epoch" '+%H:%M:%S')
+            local elapsed=$((current_epoch - start_epoch))
+            local elapsed_min=$((elapsed / 60))
+            local elapsed_sec=$((elapsed % 60))
+            
+            echo "   Started at: $start_time"
+            echo "   Running for: ${elapsed_min}m ${elapsed_sec}s"
+            
+            # Calculate next notification (approximate)
+            local next_in=$((INTERVAL - (elapsed % INTERVAL)))
+            local next_min=$((next_in / 60))
+            local next_sec=$((next_in % 60))
+            echo "   Next notification in: ${next_min}m ${next_sec}s"
+        fi
+        
+        echo "   Notification interval: $((INTERVAL/60)) minutes"
+        
+        # Send notification with all info
+        notify-send "✅ Rest reminder status" \
+            "Running (PID: $(cat "$PID_FILE"))" \
+            "Current time: $current_time" \
+            "Next notification in: ${next_min}m ${next_sec}s" \
+            2>/dev/null || true
+    else
+        echo "❌ Rest reminder is STOPPED"
+        notify-send "❌ Rest reminder is STOPPED"
+        if [[ -f "$PID_FILE" ]]; then
+            rm -f "$PID_FILE"  # Clean up stale PID file
+            rm -f "$START_TIME_FILE" 2>/dev/null
+        fi
+    fi
+}
+
+# Main command handling (rest unchanged)
+case "${1:-toggle}" in
+    start|on)
+        start_reminder
+        ;;
+    stop|off)
+        stop_reminder
+        ;;
+    toggle)
+        if [[ -f "$PID_FILE" ]] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
+            stop_reminder
+        else
+            start_reminder
+        fi
+        ;;
+    status)
+        check_status
+        ;;
+    help|--help|-h)
+        echo "Rest Reminder Toggle Script"
+        echo ""
+        echo "Usage: $0 [command]"
+        echo ""
+        echo "Commands:"
+        echo "  start|on     - Start the rest reminder"
+        echo "  stop|off     - Stop the rest reminder"
+        echo "  toggle       - Toggle the reminder (start if stopped, stop if running)"
+        echo "  status       - Show current status"
+        echo "  help         - Show this help message"
+        echo ""
+        echo "Notifications will appear every 20 minutes"
+        ;;
+    *)
+        echo "Unknown command: $1"
+        echo "Use '$0 help' for usage information"
+        exit 1
+        ;;
+esac

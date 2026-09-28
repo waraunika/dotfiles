@@ -1,0 +1,214 @@
+#!/usr/bin/env python3
+"""
+Study-time scheduler.
+
+Given a start date offset (e.g. -1) and an array of numbers (hours to study
+per "block"), this walks through a fixed daily set of study periods:
+
+    07:00 - 09:30
+    10:00 - 14:00
+    14:30 - 16:30
+    17:00 - 19:30
+    20:00 - 23:00
+
+starting at day{start_date} 20:00 and ending at day{start_date+4} 07:00
+(a fixed total budget of 45 hours), and returns an array of the same length
+as the input, where each entry is the (date_offset, "HH:MM") timestamp
+reached after consuming that many hours from the current position.
+
+If the input array's sum isn't 45, it's rescaled so it sums to 45, with all
+elements rounded to the nearest 0.5 (last element absorbs rounding drift so
+the sum stays exactly 45).
+"""
+
+from datetime import datetime, timedelta
+
+PERIODS = [
+    ("07:00", "09:30"),
+    ("10:00", "14:00"),
+    ("14:30", "16:30"),
+    ("17:00", "19:30"),
+    ("20:00", "23:00"),
+]
+
+TOTAL_BUDGET_HOURS = 45.0
+
+
+def _t(hhmm):
+    h, m = map(int, hhmm.split(":"))
+    return timedelta(hours=h, minutes=m)
+
+
+def build_timeline(start_date):
+    """
+    Build the ordered list of (date_offset, period_start, period_end) tuples
+    from start_date 20:00 through start_date+4 07:00.
+
+    The first period included is the 20:00-23:00 block of `start_date`.
+    We then walk forward day by day through all 5 periods, stopping once
+    we've included the 07:00-09:30 block of start_date+4 (since day+4 07:00
+    is the end target, and that block's start (07:00) is exactly our end).
+    """
+    timeline = []
+    # Start at the last period (20:00-23:00) of start_date
+    day = start_date
+    period_idx = len(PERIODS) - 1  # index of 20:00-23:00
+
+    while True:
+        p_start, p_end = PERIODS[period_idx]
+        timeline.append((day, p_start, p_end))
+
+        # Stop condition: we just added the final period ending exactly
+        # at start_date+4 07:00 -> that's PERIODS[0] on day start_date+4,
+        # but PERIODS[0] ends at 09:30, not 07:00. The *start* of that
+        # period (07:00) is our target end time, so we stop right before
+        # adding a period whose start would be past start_date+4 07:00.
+        # In practice: stop once we've added the 20:00-23:00 block of
+        # start_date+3 day (which flows into start_date+4 07:00).
+        if day == start_date + 3 and period_idx == len(PERIODS) - 1:
+            break
+
+        period_idx += 1
+        if period_idx >= len(PERIODS):
+            period_idx = 0
+            day += 1
+
+    return timeline
+
+
+def total_available_hours(timeline):
+    total = timedelta()
+    for _, p_start, p_end in timeline:
+        total += _t(p_end) - _t(p_start)
+    return total.total_seconds() / 3600.0
+
+
+def rescale_to_budget(numbers, budget=TOTAL_BUDGET_HOURS):
+    """Rescale `numbers` so they sum to `budget`, rounded to nearest 0.5,
+    with the last element absorbing rounding drift so the sum stays exact."""
+    s = sum(numbers)
+    if s == 0:
+        raise ValueError("Sum of input array cannot be 0.")
+
+    constant = budget / s
+    scaled = [n * constant for n in numbers]
+
+    # Round every element except the last to nearest 0.5
+    rounded = [round(x * 2) / 2 for x in scaled[:-1]]
+    used = sum(rounded)
+    last = budget - used
+    # last should naturally already be a multiple of 0.5 if budget is,
+    # but guard against float drift by rounding it too, then re-patch
+    # onto itself only (no further redistribution) to keep sum exact.
+    last = round(last * 2) / 2
+    # Correct any leftover float error by nudging last so total is exact.
+    drift = budget - (used + last)
+    last += drift
+
+    rounded.append(last)
+    return rounded
+
+
+def walk_schedule(start_date, hours_list):
+    """
+    Given hours_list (already rescaled/rounded to sum to 45), walk the
+    timeline and return a list of (date_offset, "HH:MM") strings marking
+    where each element's chunk of study time ends.
+    """
+    timeline = build_timeline(start_date)
+
+    results = []
+
+    # Pointer into timeline
+    seg_idx = 0
+    day, p_start, p_end = timeline[seg_idx]
+    cur_time = _t(p_start)  # time-of-day offset within `day`
+    seg_end = _t(p_end)
+
+    for hours in hours_list:
+        remaining = timedelta(hours=hours)
+
+        while remaining > timedelta(0):
+            time_left_in_seg = seg_end - cur_time
+
+            if remaining <= time_left_in_seg:
+                cur_time += remaining
+                remaining = timedelta(0)
+            else:
+                remaining -= time_left_in_seg
+                seg_idx += 1
+                if seg_idx >= len(timeline):
+                    raise ValueError(
+                        "Ran out of schedule before consuming all hours. "
+                        "Input sum exceeds the available budget."
+                    )
+                day, p_start, p_end = timeline[seg_idx]
+                cur_time = _t(p_start)
+                seg_end = _t(p_end)
+
+        # Format cur_time back into HH:MM
+        total_minutes = int(cur_time.total_seconds() // 60)
+        hh = total_minutes // 60
+        mm = total_minutes % 60
+        results.append((day, f"{hh:02d}:{mm:02d}"))
+
+    return results
+
+
+def run(start_date, numbers):
+    total = sum(numbers)
+    print(f"Input array: {numbers}")
+    print(f"Sum: {total}")
+
+    if abs(total - TOTAL_BUDGET_HOURS) < 1e-9:
+        adjusted = numbers
+        print("Sum already equals 45 — no rescaling needed.")
+    else:
+        constant = TOTAL_BUDGET_HOURS / total
+        print(f"Multiplying constant: {TOTAL_BUDGET_HOURS}/{total} = {constant:.6f}")
+        adjusted = rescale_to_budget(numbers)
+        print(f"Rescaled + rounded to nearest 0.5: {adjusted}")
+        print(f"New sum: {sum(adjusted)}")
+
+    schedule = walk_schedule(start_date, adjusted)
+
+    print("\nResulting timestamps:")
+    for original, (day, time_str) in zip(numbers, schedule):
+        sign = f"+{day}" if day >= 0 else str(day)
+        print(f"  {original:>6} -> day{sign} {time_str}")
+
+    return schedule
+
+
+def _print_usage():
+    print("Usage:")
+    print("  scheduler <start_date> <n1> <n2> ... <nN>")
+    print()
+    print("Example:")
+    print("  scheduler -1 2 4 12 4 4 4 9 6")
+    print()
+    print("If no arguments are given, runs the built-in example.")
+
+
+if __name__ == "__main__":
+    import sys
+
+    argv = sys.argv[1:]
+
+    if not argv:
+        # No args -> run the example from the spec
+        run(-1, [2, 4, 12, 4, 4, 4, 9, 6])
+    elif argv[0] in ("-h", "--help"):
+        _print_usage()
+    else:
+        try:
+            start_date = int(argv[0])
+            numbers = [float(x) for x in argv[1:]]
+            if not numbers:
+                raise ValueError("Need at least one number after start_date.")
+        except ValueError as e:
+            print(f"Error parsing arguments: {e}\n")
+            _print_usage()
+            sys.exit(1)
+
+        run(start_date, numbers)

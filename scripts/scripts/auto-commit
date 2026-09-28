@@ -1,0 +1,247 @@
+#!/usr/bin/env zsh
+
+# Auto-commit and push toggle script
+# Usage: ./autocommit.zsh [start|stop|toggle|status|help] [directory]
+
+# Configuration
+INTERVAL=1800  # 30 minutes in seconds
+PID_FILE="/tmp/autocommit.pid"
+START_TIME_FILE="/tmp/autocommit_start.time"
+LOG_FILE="/tmp/autocommit.log"
+TARGET_DIR="/tmp/autocommit_target_dir.txt"  # Store the target directory
+
+# Function to start the auto-commit process
+start_commit() {
+    local target_dir="${1:-$(pwd)}"  # Use argument or current directory
+    
+    # Check if the directory exists
+    if [[ ! -d "$target_dir" ]]; then
+        echo "Error: Directory '$target_dir' does not exist"
+        notify-send "❌ Auto-commit" "Directory '$target_dir' does not exist" -u critical -t 5000
+        return 1
+    fi
+    
+    # Check if it's a git repository
+    if [[ ! -d "$target_dir/.git" ]]; then
+        echo "Error: '$target_dir' is not a git repository"
+        notify-send "❌ Auto-commit" "'$target_dir' is not a git repository" -u critical -t 5000
+        return 1
+    fi
+    
+    if [[ -f "$PID_FILE" ]] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
+        echo "Auto-commit is already running (PID: $(cat "$PID_FILE"))"
+        notify-send "Auto-commit is already running (PID: $(cat "$PID_FILE"))"
+        return 1
+    fi
+    
+    echo "Starting auto-commit (every 30 minutes)..."
+    echo "Target directory: $target_dir"
+    notify-send "Starting auto-commit" "Target: $target_dir (every 30 minutes)"
+    
+    # Save start time and target directory
+    date +%s > "$START_TIME_FILE"
+    echo "$target_dir" > "$TARGET_DIR"
+    
+    # Start the background process
+    (
+        while true; do
+            sleep "$INTERVAL"
+            
+            # Read the target directory
+            local work_dir=$(cat "$TARGET_DIR" 2>/dev/null)
+            if [[ -z "$work_dir" || ! -d "$work_dir" ]]; then
+                work_dir="$target_dir"  # Fallback to the original target
+            fi
+            
+            # Change to the target directory
+            cd "$work_dir" || {
+                echo "[$(date '+%Y-%m-%d %H:%M:%S')] ERROR: Cannot change to directory: $work_dir" >> "$LOG_FILE"
+                notify-send "❌ Auto-commit" "Cannot access directory: $work_dir" -u critical -t 5000
+                continue
+            }
+            
+            # Get current date for commit message
+            local commit_date=$(date '+%Y-%m-%d %H:%M:%S')
+            local commit_msg="backup_$(date '+%Y%m%d_%H%M%S')"
+            
+            # Check if there are changes to commit
+            local git_status=$(git status --porcelain 2>/dev/null)
+            
+            if [[ -z "$git_status" ]]; then
+                # No changes to commit
+                echo "[$(date '+%Y-%m-%d %H:%M:%S')] No changes to commit in $work_dir" >> "$LOG_FILE"
+                notify-send "📝 Auto-commit" "No changes to commit in $(basename $work_dir)" -u low -t 2000
+            else
+                # There are changes, commit them
+                echo "[$(date '+%Y-%m-%d %H:%M:%S')] Committing changes in $work_dir..." >> "$LOG_FILE"
+                git add -A
+                git commit -m "$commit_msg"
+                
+                # Check if commit was successful
+                if [[ $? -eq 0 ]]; then
+                    notify-send "✅ Auto-commit" "Changes committed in $(basename $work_dir): $commit_msg" -u normal -t 3000
+                    canberra-gtk-play -i bell 2>/dev/null || true
+                    
+                    # Check if we need to push
+                    local push_status=$(git status 2>/dev/null)
+                    if echo "$push_status" | grep -q "ahead of 'origin"; then
+                        echo "[$(date '+%Y-%m-%d %H:%M:%S')] Pushing to remote from $work_dir..." >> "$LOG_FILE"
+                        git push
+                        if [[ $? -eq 0 ]]; then
+                            notify-send "🚀 Auto-push" "Successfully pushed to remote from $(basename $work_dir)" -u normal -t 3000
+                        else
+                            notify-send "⚠️ Auto-push" "Failed to push to remote from $(basename $work_dir)" -u critical -t 5000
+                        fi
+                    else
+                        echo "[$(date '+%Y-%m-%d %H:%M:%S')] No need to push (up to date) in $work_dir" >> "$LOG_FILE"
+                    fi
+                else
+                    notify-send "❌ Auto-commit" "Failed to commit changes in $(basename $work_dir)" -u critical -t 5000
+                fi
+            fi
+        done
+    ) & 
+    
+    # Save PID
+    echo "$!" > "$PID_FILE"
+    echo "Auto-commit started with PID: $! (target: $target_dir)"
+    notify-send "Auto-commit started" "PID: $! Target: $target_dir"
+}
+
+# Function to stop the auto-commit process
+stop_commit() {
+    if [[ -f "$PID_FILE" ]]; then
+        local pid="$(cat "$PID_FILE")"
+        if kill -0 "$pid" 2>/dev/null; then
+            kill "$pid"
+            echo "Auto-commit stopped (PID: $pid)"
+            notify-send "Auto-commit stopped (PID: $pid)"
+            echo "[$(date '+%Y-%m-%d %H:%M:%S')] Auto-commit stopped" >> "$LOG_FILE"
+        else
+            notify-send "Auto-commit was not running"
+            echo "Auto-commit was not running"
+        fi
+        rm -f "$PID_FILE"
+        rm -f "$START_TIME_FILE" 2>/dev/null
+        rm -f "$TARGET_DIR" 2>/dev/null
+    else
+        notify-send "Auto-commit is not running"
+        echo "Auto-commit is not running"
+    fi
+}
+
+# Function to check status
+check_status() {
+    if [[ -f "$PID_FILE" ]] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
+        local current_time=$(date '+%H:%M:%S')
+        local current_epoch=$(date +%s)
+        
+        echo "✅ Auto-commit is RUNNING (PID: $(cat "$PID_FILE"))"
+        echo "   Current time: $current_time"
+        
+        # Show target directory if available
+        if [[ -f "$TARGET_DIR" ]]; then
+            local target_dir=$(cat "$TARGET_DIR")
+            echo "   Target directory: $target_dir"
+        fi
+        
+        # Show when it was started if available
+        if [[ -f "$START_TIME_FILE" ]]; then
+            local start_epoch=$(cat "$START_TIME_FILE")
+            local start_time=$(date -d "@$start_epoch" '+%H:%M:%S' 2>/dev/null || date -r "$start_epoch" '+%H:%M:%S')
+            local elapsed=$((current_epoch - start_epoch))
+            local elapsed_min=$((elapsed / 60))
+            local elapsed_sec=$((elapsed % 60))
+            
+            echo "   Started at: $start_time"
+            echo "   Running for: ${elapsed_min}m ${elapsed_sec}s"
+            
+            # Calculate next auto-commit (approximate)
+            local next_in=$((INTERVAL - (elapsed % INTERVAL)))
+            local next_min=$((next_in / 60))
+            local next_sec=$((next_in % 60))
+            echo "   Next auto-commit in: ${next_min}m ${next_sec}s"
+        fi
+        
+        echo "   Auto-commit interval: $((INTERVAL/60)) minutes"
+        
+        # Show last few log entries
+        if [[ -f "$LOG_FILE" ]]; then
+            echo ""
+            echo "   Recent activity:"
+            tail -3 "$LOG_FILE" | sed 's/^/   /'
+        fi
+        
+        # Send notification with status
+        notify-send "✅ Auto-commit status" \
+            "Running (PID: $(cat "$PID_FILE"))" \
+            "Current time: $current_time" \
+            "Next auto-commit in: ${next_min}m ${next_sec}s" \
+            2>/dev/null || true
+    else
+        echo "❌ Auto-commit is STOPPED"
+        notify-send "❌ Auto-commit is STOPPED"
+        if [[ -f "$PID_FILE" ]]; then
+            rm -f "$PID_FILE"  # Clean up stale PID file
+            rm -f "$START_TIME_FILE" 2>/dev/null
+            rm -f "$TARGET_DIR" 2>/dev/null
+        fi
+    fi
+}
+
+# Main command handling
+case "${1:-toggle}" in
+    start|on)
+        shift  # Remove the command from arguments
+        start_commit "$@"  # Pass any remaining arguments as directory
+        ;;
+    stop|off)
+        stop_commit
+        ;;
+    toggle)
+        if [[ -f "$PID_FILE" ]] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
+            stop_commit
+        else
+            shift  # Remove the 'toggle' command
+            start_commit "$@"  # Pass any remaining arguments as directory
+        fi
+        ;;
+    status)
+        check_status
+        ;;
+    help|--help|-h)
+        echo "Auto-commit and Push Toggle Script"
+        echo ""
+        echo "Usage: $0 [command] [directory]"
+        echo ""
+        echo "Commands:"
+        echo "  start|on [dir]  - Start the auto-commit process for specified directory"
+        echo "                    (defaults to current directory if no dir provided)"
+        echo "  stop|off        - Stop the auto-commit process"
+        echo "  toggle [dir]    - Toggle the process (start with dir if stopped)"
+        echo "  status          - Show current status and recent activity"
+        echo "  help            - Show this help message"
+        echo ""
+        echo "Arguments:"
+        echo "  directory       - Path to the git repository to monitor"
+        echo "                    (must be a valid git repository)"
+        echo ""
+        echo "Examples:"
+        echo "  $0 start /path/to/my/project"
+        echo "  $0 toggle ~/work/my-repo"
+        echo "  $0 status"
+        echo ""
+        echo "What it does:"
+        echo "  • Every 30 minutes, checks if there are uncommitted changes"
+        echo "  • If changes exist, commits them with message: backup_YYYYMMDD_HHMMSS"
+        echo "  • If the local branch is ahead of remote, pushes the changes"
+        echo "  • Sends desktop notifications for each action"
+        echo ""
+        echo "Log file: $LOG_FILE"
+        ;;
+    *)
+        echo "Unknown command: $1"
+        echo "Use '$0 help' for usage information"
+        exit 1
+        ;;
+esac

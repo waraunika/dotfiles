@@ -1,0 +1,225 @@
+#!/usr/bin/env bash
+# /* ---- 💫 rofi-music.sh 💫 ---- */
+# A rofi script for browsing and playing music from ~/Music
+#
+# Two modi:
+#   - Flat mode    : every track under MUSIC_DIR, shown as a single searchable list
+#   - Browse mode   : navigate folder by folder, like a file browser
+# Plus:
+#   - Alt-s   : toggle shuffle of whatever list is currently on screen
+#   - Alt-b   : switch between Flat <-> Browse mode
+#   - Alt-x   : stop playback
+#   - Enter on a track : play it (queues after current if Ctrl held... see below)
+#
+# Playback is handled by a persistent `mpv --idle` instance driven over a
+# unix socket, so this script can tell it to play/stop without blocking rofi.
+
+set -uo pipefail
+
+MUSIC_DIR="${MUSIC_DIR:-$HOME/Music}"
+MPV_SOCKET="${XDG_RUNTIME_DIR:-/tmp}/rofi-music-mpv.sock"
+STATE_DIR="${XDG_RUNTIME_DIR:-/tmp}/rofi-music"
+STATE_FILE="$STATE_DIR/state"   # remembers: mode, cwd (browse), shuffle
+mkdir -p "$STATE_DIR"
+
+ROFI=$(command -v rofi)
+MPV=$(command -v mpv)
+NOTIFY_SEND=$(command -v notify-send)
+SOCAT=$(command -v socat)
+
+AUDIO_EXTS=(mp3 m4a flac wav ogg opus aac wma)
+
+if [ -z "${ROFI}" ]; then
+    echo "Did not find rofi, there is no point to continue."
+    exit 1
+fi
+if [ -z "${MPV}" ]; then
+    echo "Did not find mpv, cannot play anything. Install mpv."
+    exit 1
+fi
+
+notify() {
+    [ -n "$NOTIFY_SEND" ] && notify-send -u low -a "Rofi Music" "$1" "${2:-}"
+}
+
+# ---------------------------------------------------------------------------
+# State handling (mode + browse cwd + shuffle flag persist between rofi calls,
+# since each keypress/selection re-execs this script)
+# ---------------------------------------------------------------------------
+MODE="flat"
+CWD="$MUSIC_DIR"
+SHUFFLE=0
+
+load_state() {
+    [ -f "$STATE_FILE" ] || return 0
+    # shellcheck disable=SC1090
+    source "$STATE_FILE"
+}
+save_state() {
+    printf 'MODE=%q\nCWD=%q\nSHUFFLE=%q\n' "$MODE" "$CWD" "$SHUFFLE" > "$STATE_FILE"
+}
+
+# ---------------------------------------------------------------------------
+# mpv control over its JSON IPC socket
+# ---------------------------------------------------------------------------
+ensure_mpv() {
+    if [ -S "$MPV_SOCKET" ] && printf '{"command":["get_property","idle-active"]}\n' \
+        | timeout 0.5 socat - "UNIX-CONNECT:$MPV_SOCKET" >/dev/null 2>&1; then
+        return 0
+    fi
+    rm -f "$MPV_SOCKET"
+    nohup "$MPV" --idle=yes --no-video --input-ipc-server="$MPV_SOCKET" \
+        >/tmp/rofi-music-mpv.log 2>&1 &
+    disown
+    for _ in $(seq 1 20); do
+        [ -S "$MPV_SOCKET" ] && break
+        sleep 0.1
+    done
+}
+
+mpv_cmd() {
+    # $1 = JSON command payload, e.g. '{"command":["loadfile","/path"]}'
+    if [ -n "$SOCAT" ]; then
+        printf '%s\n' "$1" | timeout 0.5 socat - "UNIX-CONNECT:$MPV_SOCKET" >/dev/null 2>&1
+    else
+        # Fallback: bash /dev/tcp doesn't do unix sockets, so try mpv's own
+        # --script-opts approach isn't viable headless; ask user to install socat.
+        echo "socat not found; install socat for playback control." >&2
+        return 1
+    fi
+}
+
+play_file() {
+    local f="$1"
+    ensure_mpv
+    mpv_cmd "$(printf '{"command":["loadfile",%s,"replace"]}' "$(json_str "$f")")"
+    notify "Now playing" "$(basename "$f")"
+}
+
+stop_playback() {
+    mpv_cmd '{"command":["stop"]}'
+    notify "Playback stopped"
+}
+
+json_str() {
+    # minimal JSON string escaper for a single path
+    local s="$1"
+    s="${s//\\/\\\\}"
+    s="${s//\"/\\\"}"
+    printf '"%s"' "$s"
+}
+
+# ---------------------------------------------------------------------------
+# Track discovery
+# ---------------------------------------------------------------------------
+find_expr=()
+for ext in "${AUDIO_EXTS[@]}"; do
+    find_expr+=(-iname "*.${ext}" -o)
+done
+unset 'find_expr[${#find_expr[@]}-1]'   # drop trailing -o
+
+list_all_tracks() {
+    find "$MUSIC_DIR" -type f \( "${find_expr[@]}" \) 2>/dev/null | sort
+}
+
+list_dir_entries() {
+    # folders first (with trailing /), then audio files, both sorted
+    local d="$1"
+    find "$d" -mindepth 1 -maxdepth 1 -type d 2>/dev/null | sort | while read -r sub; do
+        printf '%s/\n' "$(basename "$sub")"
+    done
+    find "$d" -mindepth 1 -maxdepth 1 -type f \( "${find_expr[@]}" \) 2>/dev/null | sort | while read -r f; do
+        basename "$f"
+    done
+}
+
+shuffle_lines() {
+    if command -v shuf >/dev/null 2>&1; then
+        shuf
+    else
+        awk 'BEGIN{srand()} {print rand()"\t"$0}' | sort -n | cut -f2-
+    fi
+}
+
+# ---------------------------------------------------------------------------
+# rofi invocation
+# ---------------------------------------------------------------------------
+ROFI_FLAGS=(-dmenu -i -markup-rows -p "Music")
+ROFI_FLAGS+=(-kb-custom-1 "Ctrl-s")   # toggle shuffle
+ROFI_FLAGS+=(-kb-custom-2 "Ctrl-i")   # toggle flat/browse
+ROFI_FLAGS+=(-kb-custom-3 "Ctrl-x")   # stop playback
+ROFI_FLAGS+=(-kb-custom-4 "Ctrl-o") # go up a dir in browse mode
+
+run_rofi() {
+    local prompt="$1"; shift
+    "$ROFI" "${ROFI_FLAGS[@]}" -p "$prompt" "$@" -theme "$HOME/.config/rofi/launchers/type-1/style-9.rasi"
+}
+
+mesg_line() {
+    local shuf_state="Off"
+    [ "$SHUFFLE" = "1" ] && shuf_state="On"
+    printf 'Mode: <b>%s</b>  |  Shuffle: <b>%s</b> |\nCtrl-i: switch mode  Ctrl-s: shuffle  Ctrl-x: stop' \
+        "$MODE" "$shuf_state"
+}
+
+# ---------------------------------------------------------------------------
+# Main loop
+# ---------------------------------------------------------------------------
+load_state
+
+while true; do
+    case "$MODE" in
+        flat)
+            # relative paths as display, real path kept alongside via array index
+            mapfile -t REL_LIST < <(list_all_tracks | sed "s|^$MUSIC_DIR/||")
+            DISPLAY_LIST=("${REL_LIST[@]}")
+            [ "$SHUFFLE" = "1" ] && mapfile -t DISPLAY_LIST < <(printf '%s\n' "${REL_LIST[@]}" | shuffle_lines)
+            LISTING=$(printf '%s\n' "${DISPLAY_LIST[@]}")
+            ;;
+        browse)
+            mapfile -t DISPLAY_LIST < <(list_dir_entries "$CWD")
+            [ "$SHUFFLE" = "1" ] && mapfile -t DISPLAY_LIST < <(printf '%s\n' "${DISPLAY_LIST[@]}" | shuffle_lines)
+            if [ "$CWD" != "$MUSIC_DIR" ]; then
+                DISPLAY_LIST=(".." "${DISPLAY_LIST[@]}")
+            fi
+            LISTING=$(printf '%s\n' "${DISPLAY_LIST[@]}")
+            ;;
+    esac
+
+    save_state
+    SEL=$(printf '%s' "$LISTING" | run_rofi "$(basename "$CWD")" -format i -mesg "$(mesg_line)")
+    RTR=$?
+
+    case "$RTR" in
+        1) exit 0 ;;                 # Escape
+        10) SHUFFLE=$((1 - SHUFFLE)); save_state; continue ;;      # Alt-s
+        11)                                                         # Alt-b
+            if [ "$MODE" = "flat" ]; then MODE="browse"; CWD="$MUSIC_DIR"; else MODE="flat"; fi
+            save_state; continue ;;
+        12) stop_playback; continue ;;                              # Alt-x
+        13)                                                          # backspace -> up a dir
+            [ "$MODE" = "browse" ] && [ "$CWD" != "$MUSIC_DIR" ] && CWD=$(dirname "$CWD")
+            continue ;;
+        0)
+            [ -z "${SEL:-}" ] && continue
+            case "$MODE" in
+                flat)
+                    rel="${DISPLAY_LIST[$SEL]}"
+                    play_file "$MUSIC_DIR/$rel"
+                    ;;
+                browse)
+                    entry="${DISPLAY_LIST[$SEL]}"
+                    if [ "$entry" = ".." ]; then
+                        CWD=$(dirname "$CWD")
+                    elif [[ "$entry" == */ ]]; then
+                        CWD="$CWD/${entry%/}"
+                    else
+                        play_file "$CWD/$entry"
+                    fi
+                    ;;
+            esac
+            continue
+            ;;
+        *) exit 0 ;;
+    esac
+done

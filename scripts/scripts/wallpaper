@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+
+WALL_DIR="$HOME/Pictures/Wallpapers"
+ROFI_DIR="$HOME/.config/rofi/launchers/type-2"
+THEME="style-15"
+ICON_SIZE=256 # rofi icon size; adjust to taste
+
+NVIM_VARS="$HOME/.config/nvim/lua/vars.lua"
+
+# Map wallpaper folder -> neovim theme
+folder_to_nvim_theme() {
+  case "$1" in
+  blue) echo "nord" ;;
+  green) echo "everforest" ;;
+  red) echo "gruvbox" ;;
+  purple) echo "catppuccin" ;;
+  orange) echo "oasis" ;;
+  pink) echo "rose-pine" ;;
+  black) echo "onedark" ;;
+  white) echo "onelight" ;;
+  yellow) echo "oasis" ;;
+  *) echo "" ;;
+  esac
+}
+
+swap_nvim_theme() {
+  local new_theme="$1"
+  [[ -z "$new_theme" ]] && return 0
+  [[ -f "$NVIM_VARS" ]] || return 0
+
+  # Replace whatever is inside theme = "..." with new_theme
+  awk -v t="$new_theme" '
+        /theme[[:space:]]*=/ {
+            sub(/theme[[:space:]]*=[[:space:]]*"[^"]*"/, "theme = \"" t "\"")
+        }
+        { print }
+    ' "$NVIM_VARS" >"$NVIM_VARS.tmp" && mv "$NVIM_VARS.tmp" "$NVIM_VARS"
+}
+
+# --- Stage 1: build folder list with a representative thumbnail ---
+# For each folder, use ./cover.* or ./thumbnail.* if present, else the first image.
+build_folder_entries() {
+  for d in "$WALL_DIR"/*/; do
+    [[ -d "$d" ]] || continue
+    name=$(basename "$d")
+
+    thumb=""
+    for cand in cover thumbnail preview; do
+      for ext in png jpg jpeg webp; do
+        if [[ -f "$d$cand.$ext" ]]; then
+          thumb="$d$cand.$ext"
+          break 2
+        fi
+      done
+    done
+
+    if [[ -z "$thumb" ]]; then
+      thumb=$(find "$d" -mindepth 1 -maxdepth 1 -type f \
+        \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) |
+        sort | head -n1)
+    fi
+
+    # Fallback icon if folder is empty
+    [[ -z "$thumb" ]] && thumb="folder"
+
+    printf '%s\0icon\x1f%s\n' "$name" "$thumb"
+  done
+}
+
+folder=$(build_folder_entries |
+  rofi -x11 -dmenu -i -p "Wallpaper color" \
+    -theme "${ROFI_DIR}/${THEME}.rasi" \
+    -show-icons -icon-size "$ICON_SIZE" \
+    -format 's')
+
+[[ -z "$folder" ]] && exit 0
+
+# --- Stage 2: build image list with thumbnails ---
+build_image_entries() {
+  find "$WALL_DIR/$folder" -mindepth 1 -maxdepth 1 -type f \
+    \( -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.webp' \) |
+    sort | while read -r f; do
+    printf '%s\0icon\x1f%s\n' "$(basename "$f")" "$f"
+  done
+}
+
+img=$(build_image_entries |
+  rofi -x11 -dmenu -i -p "$folder" \
+    -theme "${ROFI_DIR}/${THEME}.rasi" \
+    -show-icons -icon-size "$ICON_SIZE" \
+    -format 's')
+
+[[ -z "$img" ]] && exit 0
+
+WALL="$WALL_DIR/$folder/$img"
+
+# --- Apply wallpaper ---
+awww img "$WALL"
+
+# --- Generate theme ---
+matugen image "$WALL" --source-color-index 0
+
+swap_nvim_theme "$(folder_to_nvim_theme "$folder")"
