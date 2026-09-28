@@ -15,3 +15,5 @@ hl.bind(script .. "+" .. vars.mods.secMod .. "+ B", hl.dsp.exec_cmd("scripts/res
 hl.bind(script .. "+" .. vars.mods.priMod .. "+" .. vars.mods.secMod .. "+ B", hl.dsp.exec_cmd("scripts/rest status"))
 
 hl.bind(script .. "+ M", hl.dsp.exec_cmd("~/scripts/rofi-music"))
+
+hl.bind(script .. " + T", hl.dsp.exec_cmd("~/scripts/wallpaper"))

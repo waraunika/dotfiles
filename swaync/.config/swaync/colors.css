@@ -1,9 +1,9 @@
-@define-color bg0 #0f1512;
-@define-color bg1 #151e1a;
-@define-color bg2 #2a3c33;
-@define-color bg3 #354a40;
-@define-color bg4 #40594d;
-@define-color fg #dee4df;
+@define-color bg0 #101510;
+@define-color bg1 #161d16;
+@define-color bg2 #2c3a2c;
+@define-color bg3 #374837;
+@define-color bg4 #425742;
+@define-color fg #dfe4dd;
 
 /* Fixed custom colors for the specific accent palette */
 @define-color red #ffb5a1;
@@ -19,6 +19,6 @@
 @define-color gray1 #828997;
 @define-color gray2 #abb2bf;
 
-@define-color primary #4edfad;
+@define-color primary #4edf77;
 
 /* targeting #df6b50*/

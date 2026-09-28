@@ -16,5 +16,3 @@ hl.bind(mainMod .. "+" .. vars.mods.secMod .. "+ H", hl.dsp.exec_cmd("hyprpicker
 
 hl.bind(mainMod .. "+" .. vars.mods.secMod .. "+ L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(mainMod .. "+" .. vars.mods.secMod .. "+ P", hl.dsp.exec_cmd("wlogout --buttons-per-row 4"))
-
-hl.bind(mainMod .. "+ N", hl.dsp.exec_cmd("swaync-client -t"))

@@ -15,6 +15,7 @@ local keymaps = {
 	{ "E", vars.apps.fileManager },
 	{ "E", vars.apps.fileManager1, { vars.mods.priMod } },
 	{ "E", vars.apps.fileManager2, { vars.mods.secMod } },
+	{ "N", "kitty nvim" },
 	{ "O", "obsidian" },
 	{ "S", "prime-run steam" },
 	{ "V", "codium" },
