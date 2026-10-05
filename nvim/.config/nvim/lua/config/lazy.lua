@@ -26,9 +26,9 @@ require("lazy").setup({
 	require("plugins.window.indent-blankline"),
 
 	--require "plugins.colortheme.onedark-olimorris",
-	--require "plugins.colortheme.onedark-navarasu",
-	--require("plugins.colortheme.nord-shaunsingh"),
-	require("plugins.colortheme.everforest-sainnhe"),
+	--require "plugins.colortheme.onedark",
+	--require("plugins.colortheme.nord"),
+	require("plugins.colortheme.everforest"),
 
 	require("plugins.workflow.treesitter"),
 	require("plugins.workflow.telescope"),
@@ -37,7 +37,7 @@ require("lazy").setup({
 	require("plugins.workflow.zen-mode"),
 	require("plugins.workflow.conform"),
 	require("plugins.workflow.autopairs"),
-	require("plugins.workflow.treesitter-context"),
+	require("plugins.workflow.session"),
 
 	require("plugins.language.tex"),
 	require("plugins.language.php"),

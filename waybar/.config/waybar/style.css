@@ -13,44 +13,18 @@
 	padding: 0;
 	margin: 0 0 0 0;
 
-	color: @foreground;
+	background-color: alpha(@on_primary, 0.15);
 
 	box-shadow: none;
-}
-
-window#waybar {
-	background-color: alpha(@background, 0.1);
-	padding: 0px;
-}
-
-/* ** Tool Tip CSS ** */
-
-tooltip {
-	border-radius: 12px;
-	border-width: 2px;
-	border-style: solid;
-	border-color: @secondary_container;
-
-	padding: 2px;
-
-	background-color: alpha(@base01, 0.8);
-}
-
-tooltip label {
-	color: @primary;
-	padding: 2px;
 }
 
 /* ** Idle Inhibitor CSS ** */
 
 #idle_inhibitor {
-	color: @foreground;
-	border: 1px solid @base04;
-	border-radius: 10px;
-	padding: 4px 8px;
+	color: @secondary;
 	margin-right: 4px;
 
-	background-color: alpha(@on_primary, 0.1);
+	background-color: alpha(@on_secondary, 0.1);
 }
 
 /* ** Workspace CSS ** */
@@ -82,6 +56,7 @@ tooltip label {
 	background: @secondary_container;
 }
 
+#workspaces button:hover,
 #workspaces button:hover label {
 	font-size: 11px;
 	font-weight: bold;
@@ -99,22 +74,40 @@ tooltip label {
 	min-width: 50px;
 }
 
-#workspaces button:focus,
-#workspaces button:focus label {
-	background-color: transparent;
-}
-
 #workspaces button.urgent {
 	color: #11111b;
 	background: @error_container;
 	border-radius: 15px;
 }
 
+/* ** Tool Tip CSS ** */
+
+tooltip {
+	border-radius: 12px;
+	border-width: 2px;
+	border-style: solid;
+	border-color: @secondary_container;
+
+	padding: 2px;
+
+	background-color: alpha(@on_primary, 0.25);
+}
+
+tooltip label {
+	color: @primary;
+	padding: 2px;
+}
+
 /* ** Window CSS ** */
 #window {
 	padding: 4px 8px;
 
-	background-color: alpha(@source, 0.1);
+	background-color: alpha(@source, 0.15);
+}
+
+window#waybar {
+	background-color: alpha(@on_primary2, 0.1);
+	padding: 0px;
 }
 
 #window label {
@@ -122,7 +115,8 @@ tooltip label {
 }
 
 #custom-swaync {
-	background: alpha(@on_tertiary_container, 0.1);
+	background: alpha(@on_tertiary_container, 0.2);
+	color: @tertiary_container;
 	margin-right: 4px;
 }
 
@@ -130,20 +124,20 @@ tooltip label {
 	color: @secondary3;
 }
 
-
 /* ** Clock CSS ** */
 
 #clock,
 #clock-calender {
 	color: @primary;
 	margin-right: 4px;
-	background: alpha(@on_primary_container, 0.1);
+	background: alpha(@on_primary, 0.6);
 }
 
 /* **Audio** */
 
 #audio {
-	background: alpha(@on_secondary_container, 0.1);
+	background: alpha(@secondary_container, 0.3);
+	color: @on_secondary_container;
 }
 
 #audio label {
@@ -183,6 +177,12 @@ tooltip label {
 	margin-right: 4px;
 }
 
+#utils {
+	margin-right: 4px;
+	font-size: 13px;
+	padding-bottom: 2px;
+}
+
 #network {
 	color: @on_surface;
 	background: alpha(@surface4, 0.1);
@@ -192,11 +192,13 @@ tooltip label {
 	color: @on_surface;
 }
 
-#network.speed {
+#network.speed,
+#keyboard-state {
 	font-size: 10px;
 	font-weight: lighter;
 	padding-left: 0;
 	padding-right: 0;
+	padding-top: 2px;
 }
 
 .group-network {
@@ -207,11 +209,11 @@ tooltip label {
 /* ** Tray CSS ** */
 #tray {
 	margin-right: 4px;
-	border: 1px solid @base04;
+	border: 1px solid @on_surface;
 }
 
 #custom-power {
-	padding: 0px 2px;
+	padding: 0px 4px;
 }
 
 #custom-lock {
@@ -230,9 +232,10 @@ tooltip label {
 #battery,
 #mobo_drawer,
 #status,
+#utils,
 #mpris {
 	border: 1px solid @source;
-	border-radius: 10px;
+	border-radius: 7px;
 
 	padding: 2px 8px;
 }

@@ -13,17 +13,24 @@ local keymaps = {
 	},
 	{
 		"n",
-		"<C-w>",
+		"<A-w>",
 		":Bdelete!<CR>",
 		"Close buffer",
 	},
 	{
 		"n",
-		"<leader>b",
-		"<cmd>enew<CR>",
-		"Open new buffer",
+		"<A-q>",
+		"<cmd>BufferLineMovePrev<CR>",
+		"Move current buffer to left",
+	},
+	{
+		"n",
+		"<A-e>",
+		"<cmd>BufferLineMoveNext<CR>",
+		"Move current buffer to right",
 	},
 }
+
 for i = 1, 9 do
 	table.insert(keymaps, {
 		"n",

@@ -34,6 +34,8 @@ return {
 
 			local servers = {
 				"ts_ls",
+				"pyright",
+				"ruff",
 				"eslint",
 				"cssls",
 				"tailwindcss",
@@ -91,5 +93,17 @@ return {
 				end,
 			})
 		end,
+	},
+
+	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		dependencies = { "williamboman/mason.nvim" },
+		event = "VeryLazy",
+		opts = {
+			ensure_installed = {
+				"clang-format",
+				"codelldb",
+			},
+		},
 	},
 }

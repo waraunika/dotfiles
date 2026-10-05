@@ -67,28 +67,30 @@ log "Installing native pacman packages"
 NATIVE_PKGS=(
   7zip
 	awww alsa-lib alsa-utils amd-ucode arch-install-scripts audacity
-	baobab bluez bluez-utils brightnessctl btop
+	baobab blueman bluez bluez-utils brightnessctl btop bridge-utils
 	cava clang
-	efibootmgr emacs eza
+	dnsmasq
+	efibootmgr emacs eza edk2-ovmf
   fastfetch feh firefox fontconfig
 	gcc gcc-fortran gdu git glfw gnome-disk-utility grim grub gst-plugin-pipewire gtkwave
 	htop hyprland hypridle hyprlauncher hyprlock hyprpicker hyprsunset
-	iverilog
+	iverilog iproute2
 	jq jupyter-notebook
 	kitty lib32-nvidia-utils
 	lib32-vulkan-icd-loader libmpdclient libreoffice-fresh libsigc++ libva libxcb
-	linux linux-firmware linux-headers lvm2
+	linux linux-firmware linux-headers lvm2 libvirt
 	make man-db mangohud markdown-oxide matugen mdformat mesa-utils mkinitcpio mpv mtpfs
 	mypaint
   networkmanager ninja nodejs noto-fonts noto-fonts-cjk noto-fonts-emoji
   ncdu npm nvidia-open-dkms nvidia-prime nvidia-settings nvidia-utils nvtop nwg-look
 	obsidian octave openbox openssh openssl
-	pacman-contrib pavucontrol-qt pcmanfm-qt photoflare php pipewire pipewire-alsa
+	pacman-contrib pavucontrol pcmanfm-qt photoflare php pipewire pipewire-alsa
   pipewire-jack pipewire-pulse pkgconf playerctl power-profiles-daemon powertop
 	progress putty python-jupyter-client python-pandas python-pylatexenc python-pynvim
-	qbittorrent
+	qbittorrent qemu-full
 	raylib ripgrep rofi
 	screengrab slurp snapshot socat sof-firmware spdlog steam stow sudo swaync
+	swtpm
 	tecla texlab texlive-basic texlive-bibtexextra texlive-binextra texlive-context
 	texlive-fontsextra texlive-fontsrecommended texlive-fontutils texlive-formatsextra
   texlive-games texlive-humanities texlive-latex texlive-latexextra
@@ -97,6 +99,7 @@ NATIVE_PKGS=(
   texlive-pstricks texlive-publishers texlive-xetex thunderbird
   tmux tree tree-sitter-cli ttf-jetbrains-mono ttf-jetbrains-mono-nerd typst
 	unzip
+	virt-manager
   wf-recorder wireplumber wl-clipboard wofi wpa_supplicant wtype
   xdg-desktop-portal-hyprland
 	yarn yazi yelp yt-dlp

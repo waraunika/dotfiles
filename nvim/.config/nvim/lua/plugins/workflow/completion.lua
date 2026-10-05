@@ -11,10 +11,11 @@ return {
 			["<C-n>"] = { "select_next", "fallback" },
 			["<C-p>"] = { "select_prev", "fallback" },
 
+			["<Down>"] = { "select_next", "fallback" },
+			["<Up>"] = { "select_prev", "fallback" },
+
 			["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
 			["<C-e>"] = { "hide" },
-
-			["<CR>"] = { "accept", "fallback" }, -- Enter accepts if menu is open, else normal Enter
 		},
 		appearance = {
 			use_nvim_cmp_as_default = true,

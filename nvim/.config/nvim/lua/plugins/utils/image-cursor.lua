@@ -6,7 +6,7 @@ return {
 			-- which filetypes to watch for image links in
 			filetypes = { "markdown" },
 			-- max preview size, unit: terminal cells
-			max_width_cells = 50,
+			max_width_cells = 70,
 			max_height_cells = 20,
 			-- min usable cell height
 			min_height_cells = 6,

@@ -35,3 +35,5 @@ end
 
 map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Keep j word-wrapped" })
 map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Keep j word-wrapped" })
+
+map("n", "<leader>z", "<cmd>ZenMode<CR>", { desc = "Toggle ZenMode" })

@@ -21,7 +21,7 @@ post_hook = 'hyprctl reload'
 [templates.waybar]
 input_path = '~/.config/matugen/templates/colors.css'
 output_path = '~/.config/waybar/colors.css'
-post_hook = '~/.config/waybar/scripts/launch.sh'
+post_hook = '~/scripts/launch.sh'
 
 [templates.vscodium]
 input_path = '~/.config/matugen/templates/vscodium-settings.json'
