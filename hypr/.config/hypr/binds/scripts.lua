@@ -1,19 +1,32 @@
 local vars = require("binds.variables")
 local script = vars.mods.mainMod .. "+" .. vars.mods.scriptMod
 
-hl.bind(script .. " + W", hl.dsp.exec_cmd("scripts/launch.sh"))
-hl.bind(script .. " + K", hl.dsp.exec_cmd("scripts/kill.sh"))
+local keymaps = {
+	{ "W", "scripts/waybar/waybar_launch.sh" },
+	{ "K", "scripts/waybar/waybar_kill.sh" },
+	{ "R", "scripts/record_audioless.sh" },
+	{ "A", "scripts/record_audiofull.sh" },
+	{ "B", "scripts/rest toggle" },
+	{ "B", "scripts/rest start", { vars.mods.priMod } },
+	{ "B", "scripts/rest stop", { vars.mods.secMod } },
+	{ "M", "~/scripts/rofi-music" },
+	{ "T", "~/scripts/wallpaper" },
+	{
+		"B",
+		"scripts/rest status",
+		{ vars.mods.priMod, vars.mods.secMod },
+	},
+}
 
-hl.bind(script .. "+ A", hl.dsp.exec_cmd("scripts/record-soundful.sh"))
-hl.bind(script .. "+ R", hl.dsp.exec_cmd("scripts/record-soundless.sh"))
+for _, map in ipairs(keymaps) do
+	local key, cmd, extra_mods = map[1], map[2], map[3]
+	local mods = script
 
-hl.bind(script .. "+ E", hl.dsp.exec_cmd("scripts/rest-reminder.sh"))
+	if extra_mods then
+		mods = mods .. " + " .. table.concat(extra_mods, " + ")
+	end
 
-hl.bind(script .. "+ B", hl.dsp.exec_cmd("scripts/rest toggle"))
-hl.bind(script .. "+" .. vars.mods.priMod .. "+ B", hl.dsp.exec_cmd("scripts/rest start"))
-hl.bind(script .. "+" .. vars.mods.secMod .. "+ B", hl.dsp.exec_cmd("scripts/rest stop"))
-hl.bind(script .. "+" .. vars.mods.priMod .. "+" .. vars.mods.secMod .. "+ B", hl.dsp.exec_cmd("scripts/rest status"))
+	hl.bind(mods .. " + " .. key, hl.dsp.exec_cmd(cmd))
+end
 
-hl.bind(script .. "+ M", hl.dsp.exec_cmd("~/scripts/rofi-music"))
-
-hl.bind(script .. " + T", hl.dsp.exec_cmd("~/scripts/wallpaper"))
+hl.bind(vars.mods.mainMod .. "+ period", hl.dsp.exec_cmd("$HOME/scripts/wofi-emoji"))

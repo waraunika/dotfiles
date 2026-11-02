@@ -9,23 +9,20 @@ local keymaps = {
 		"[float] kitty",
 		{ vars.mods.priMod },
 	},
-	{ "C", vars.apps.calendar },
 	{ "B", vars.apps.browser },
-	{ "D", "vesktop" },
+	{ "D", "emacs" },
+	{ "C", vars.apps.calendar },
 	{ "E", vars.apps.fileManager },
 	{ "E", vars.apps.fileManager1, { vars.mods.priMod } },
-	{ "E", vars.apps.fileManager2, { vars.mods.secMod } },
-	{ "N", "kitty nvim" },
-	{ "O", "obsidian" },
+	{ "N", vars.apps.editor },
 	{ "S", "prime-run steam" },
-	{ "V", "codium" },
+	{ "V", "vesktop" },
 	{ "W", "whatsie" },
 	{ "X", "sioyek --new-instance" },
 	{ "Y", vars.apps.browser .. " youtube.com" },
-	{ "Z", "GSK_RENDERER=cairo zathura" },
 	{
 		"M",
-		"command -v hyprshutdown > /dev/null 2&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'",
+		"command -v hyprshutdown > /dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'",
 		{ vars.mods.priMod, vars.mods.secMod },
 	},
 }
@@ -43,6 +40,6 @@ end
 
 -- for switching to steam/discord even when not spawning:
 hl.bind(mainMod .. "+ S", hl.dsp.focus({ workspace = 9 }))
-hl.bind(mainMod .. "+ D", hl.dsp.focus({ workspace = 10 }))
+hl.bind(mainMod .. "+ V", hl.dsp.focus({ workspace = 10 }))
 hl.bind(mainMod .. "+ W", hl.dsp.focus({ workspace = 10 }))
 hl.bind(mainMod .. "+ C", hl.dsp.focus({ workspace = 4 }))

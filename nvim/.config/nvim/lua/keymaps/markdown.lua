@@ -6,4 +6,6 @@ local keymaps = {
 	{ "v", "<C-I>", [[c*<C-r>"*<Esc>]], "Markdown wrap in **...**" },
 }
 
-return keymaps
+for i = 1, #keymaps do
+	vim.keymap.set(keymaps[i][1], keymaps[i][2], keymaps[i][3], { desc = keymaps[i][4], ft = { "markdown" } })
+end

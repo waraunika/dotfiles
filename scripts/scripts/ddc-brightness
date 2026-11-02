@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# usage: ddc-brightness get | up | down | set N
+DISPLAY_NUM=1   # adjust to match `ddcutil detect`
+STEP=5
+
+case "$1" in
+  get)
+    out=$(ddcutil --display $DISPLAY_NUM getvcp 10 --brief 2>/dev/null)
+    cur=$(awk '{print $4}' <<<"$out")
+    max=$(awk '{print $5}' <<<"$out")
+    [ -z "$cur" ] && { echo '{"text":"󰍹 --","tooltip":"no DDC"}'; exit; }
+    pct=$(( cur * 100 / max ))
+    echo "{\"text\":\"󰍹 ${pct}%\",\"tooltip\":\"External monitor: ${pct}%\"}"
+    ;;
+  up)   ddcutil --display $DISPLAY_NUM --noverify setvcp 10 + $STEP ;;
+  down) ddcutil --display $DISPLAY_NUM --noverify setvcp 10 - $STEP ;;
+  set)  ddcutil --display $DISPLAY_NUM --noverify setvcp 10 "$2" ;;
+esac

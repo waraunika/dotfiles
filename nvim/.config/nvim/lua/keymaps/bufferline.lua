@@ -13,12 +13,6 @@ local keymaps = {
 	},
 	{
 		"n",
-		"<A-w>",
-		":Bdelete!<CR>",
-		"Close buffer",
-	},
-	{
-		"n",
 		"<A-q>",
 		"<cmd>BufferLineMovePrev<CR>",
 		"Move current buffer to left",

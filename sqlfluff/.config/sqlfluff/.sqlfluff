@@ -1,0 +1,12 @@
+[sqlfluff]
+dialect = postgres
+parse_embedded_in_strings = True
+
+[sqlfluff:templater:placeholder]
+param_style = dollar
+
+[sqlfluff:rules:capitalisation.keywords]
+capitalisation_policy = upper
+
+[sqlfluff:rules:layout.select_targets]
+wildcard_policy = single

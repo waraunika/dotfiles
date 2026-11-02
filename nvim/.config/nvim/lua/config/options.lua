@@ -63,8 +63,6 @@ vim.o.fileencoding = "utf-8" -- The encoding written to a file (default: 'utf-8'
 
 vim.o.cmdheight = 1 -- More space in the Neovim command line for displaying messages (default: 1)
 
-vim.o.timeoutlen = 300 -- Time to wait for a mapped sequence to complete (in milliseconds) (default: 1000)
-
 vim.o.undofile = true -- Save undo history (default: false)
 
 vim.o.completeopt = "menuone,noselect" -- Set completeopt to have a better completion experience (default: 'menu,preview')
@@ -80,3 +78,10 @@ vim.opt.runtimepath:remove("/usr/share/vim/vimfiles") -- Separate Vim plugins fr
 vim.loader.enable()
 
 vim.g.lazyvim_snacks_dashboard = false
+
+-- for expression folding/hihding
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldtext = ""

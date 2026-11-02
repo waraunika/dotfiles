@@ -3,7 +3,6 @@ local vars = {}
 vars.apps = {
 	terminal = "kitty",
 	fileManager1 = "pcmanfm",
-	fileManager2 = "nautilus",
 	fileManager = "kitty yazi",
 	menu = "hyprlauncher",
 	menu2 = ".config/rofi/launchers/type-1/launcher.sh",

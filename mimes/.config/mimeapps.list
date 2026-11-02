@@ -41,3 +41,4 @@ text/plain=nvim.desktop
 text/javascript=nvim.desktop
 application/x-shellscript=nvim.desktop
 inode/x-empty=nvim.desktop
+inode/directory=pcmanfm.desktop

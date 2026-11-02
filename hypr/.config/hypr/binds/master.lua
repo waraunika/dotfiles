@@ -5,8 +5,10 @@ hl.bind(vars.mods.mainMod .. " + comma", hl.dsp.layout("swapwithmaster ignoremas
 
 hl.bind(vars.mods.mainMod .. "+" .. vars.mods.priMod .. " + comma", hl.dsp.layout("focusmaster master"))
 hl.bind(vars.mods.mainMod .. "+" .. vars.mods.secMod .. " + comma", hl.dsp.layout("cyclenext"))
-hl.bind(vars.mods.mainMod .. "+" .. vars.mods.priMod .. "+" .. vars.mods.secMod .. " + comma", hl.dsp.layout("cycleprev"))
-
+hl.bind(
+	vars.mods.mainMod .. "+" .. vars.mods.priMod .. "+" .. vars.mods.secMod .. " + comma",
+	hl.dsp.layout("cycleprev")
+)
 
 hl.bind(vars.mods.mainMod .. "+" .. vars.mods.priMod .. " + period", hl.dsp.layout("addmaster"))
 hl.bind(vars.mods.mainMod .. "+" .. vars.mods.secMod .. " + period", hl.dsp.layout("removemaster"))

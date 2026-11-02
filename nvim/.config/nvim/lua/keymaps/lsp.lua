@@ -19,14 +19,6 @@ local keymaps = {
 	},
 	{
 		"n",
-		"<leader>f",
-		function()
-			vim.lsp.buf.format({ async = true })
-		end,
-		"Format document",
-	},
-	{
-		"n",
 		"<leader>ls",
 		function()
 			local clients = vim.lsp.get_clients()

@@ -15,11 +15,8 @@ end
 
 local modules = {
 	"keymaps.general",
-	"keymaps.latex",
 	"keymaps.lsp",
-	"keymaps.markdown",
 	"keymaps.neotree",
-	"keymaps.snacks",
 	"keymaps.bufferline",
 }
 
@@ -33,7 +30,5 @@ for _, mod in ipairs(modules) do
 	end
 end
 
-map("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = "Keep j word-wrapped" })
-map("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = "Keep j word-wrapped" })
-
-map("n", "<leader>z", "<cmd>ZenMode<CR>", { desc = "Toggle ZenMode" })
+map("n", "j", "gj", { desc = "Keep j word-wrapped" })
+map("n", "k", "gk", { desc = "Keep j word-wrapped" })

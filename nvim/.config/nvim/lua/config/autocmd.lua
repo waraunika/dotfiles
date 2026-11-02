@@ -34,6 +34,17 @@ cmd("FileType", {
 	end,
 })
 
+user_cmd("Scratch", function()
+	vim.cmd("vnew")
+	local buf = vim.api.nvim_get_current_buf()
+
+	vim.api.nvim_set_option_value("buftype", "nofile", { buf = buf })
+	vim.api.nvim_set_option_value("bufhidden", "hide", { buf = buf })
+	vim.api.nvim_set_option_value("swapfile", false, { buf = buf })
+	vim.api.nvim_set_option_value("buflisted", false, { buf = buf })
+end, {})
+vim.keymap.set("n", "<leader>sn", "<cmd>Scratch<cr>", { desc = "Open Scratch Buffer" })
+
 local function open_dir()
 	vim.ui.input({ prompt = "Directory (relative to ~): " }, function(input)
 		if not input or input == "" then

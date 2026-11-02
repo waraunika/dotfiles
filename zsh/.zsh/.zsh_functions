@@ -24,6 +24,9 @@ chpwd() {
   ls
 }
 
+phone-cam()      { systemctl --user start phone-cam; }
+phone-cam-stop() { systemctl --user stop phone-cam; }
+
 function y() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
 	command yazi "$@" --cwd-file="$tmp"
@@ -41,4 +44,11 @@ tm() {
   else
     tmux new-session -s "$name" -c "$dir" "nvim ."
   fi
+}
+
+gtav() {
+	(
+		cd "$HOME/.wine/drive_c/Program Files/Grand Theft Auto V Legacy"
+		start PLAYGTAV.exe -nobattleye
+	)
 }

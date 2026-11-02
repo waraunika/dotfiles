@@ -1,5 +1,6 @@
 {
 	"position": "top",
+	"output": "HDMI-A-1",
 	"margin-bottom": 2,
 	"modules-left": [
 		"idle_inhibitor",
@@ -13,10 +14,12 @@
 	],
 	"modules-right": [
 		"backlight",
+		"custom/ddc",
 		"battery",
 		"group/mobo_drawer",
 		"group/conn",
 		"tray",
+		"custom/phonecam",
 		"group/utils",
 		"group/status"
 	],
@@ -290,6 +293,17 @@
 		"on-click-right": "brightnessctl set 0",
 		"on-click": "brightnessctl set 100%"
 	},
+	"custom/ddc": {
+		"exec": "ddc-brightness get",
+		"return-type": "json",
+		"interval": 10,
+		"on-scroll-up": "ddc-brightness up && pkill -RTMIN+8 waybar",
+		"on-scroll-down": "ddc-brightness down && pkill -RTMIN+8 waybar",
+		"signal": 8,
+		"on-click": "ddc-brightness set 100",
+		"on-click-right": "ddc-brightness set 0",
+		"tooltip": true
+	},
 	"battery": {
 		"interval": 5,
 		"align": 0,
@@ -501,6 +515,13 @@
 			"locked": "L",
 			"unlocked": "U"
 		}
+	},
+	"custom/phonecam": {
+		"exec": "systemctl --user is-active -q phone-cam && echo '{\"text\":\"󰄀\",\"class\":\"on\",\"tooltip\":true}' || echo '{\"text\":\"󰗟\",\"class\":\"off\",\"tooltip\":false}'",
+		"return-type": "json",
+		"interval": 2,
+		"on-click": "systemctl --user start phone-cam",
+		"on-click-right": "systemctl --user stop phone-cam"
 	},
 	"group/status": {
 		"orientation": "inherit",

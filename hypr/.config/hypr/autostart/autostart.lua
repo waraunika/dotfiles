@@ -7,6 +7,7 @@ hl.on("hyprland.start", function()
 	-- hl.exec_cmd("hyprlauncher")
 	-- hl.exec_cmd("hyprsunset")
 	hl.exec_cmd("hypridle")
+	hl.exec_cmd("fcitx5 -d")
 
 	-- custom apps
 end)

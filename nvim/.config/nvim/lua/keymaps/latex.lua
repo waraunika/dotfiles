@@ -17,4 +17,6 @@ for i = 1, #keymaps do
 	keymaps[i][5] = { "latex", "markdown" }
 end
 
-return keymaps
+for i = 1, #keymaps do
+	vim.keymap.set(keymaps[i][1], keymaps[i][2], keymaps[i][3], { desc = keymaps[i][4], ft = keymaps[i][5] })
+end

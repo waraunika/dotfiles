@@ -10,8 +10,6 @@ hl.bind(
 )
 hl.bind(mainMod .. "+" .. vars.mods.secMod .. "+ S", hl.dsp.exec_cmd('grim -g "$(slurp)" - | wl-copy'))
 
-hl.bind(mainMod .. "+ period", hl.dsp.exec_cmd("$HOME/scripts/wofi-emoji"))
-
 hl.bind(mainMod .. "+" .. vars.mods.secMod .. "+ H", hl.dsp.exec_cmd("hyprpicker -a"))
 
 hl.bind(mainMod .. "+" .. vars.mods.secMod .. "+ L", hl.dsp.exec_cmd("hyprlock"))
