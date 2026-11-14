@@ -25,7 +25,19 @@ local servers = {
 	jsonls = {
 		cmd = { "vscode-json-language-server", "--stdio" },
 	},
-	lua_ls = {},
+	lua_ls = {
+		cmd = { vim.fn.expand("~/src/lua-language-server/bin/lua-language-server"), "--stdio" },
+		settings = {
+			Lua = {
+				runtime = { version = "LuaJIT" },
+				diagnostics = { globals = { "vim" } },
+				workspace = {
+					library = vim.api.nvim_get_runtime_file("", true),
+					checkThirdParty = false,
+				},
+			},
+		},
+	},
 	marksman = {},
 	-- verible = {},
 	svelte = {

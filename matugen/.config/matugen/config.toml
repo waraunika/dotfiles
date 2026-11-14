@@ -7,27 +7,6 @@ aqua = { color = "#56b6c2", blend = false }
 blue = { color = "#61afef", blend = false }
 purple = { color = "#c678dd", blend = false }
 
-[config]
-[templates.hyprland]
-input_path = '~/.config/matugen/templates/hyprland-colors.lua'
-output_path = '~/.config/hypr/colors.lua'
-post_hook = 'hyprctl reload'
-
-[templates.hyprlock]
-input_path = '~/.config/matugen/templates/hyprland-colors.lua'
-output_path = '~/.config/hypr/colors.conf'
-post_hook = 'hyprctl reload'
-
-[templates.waybar]
-input_path = '~/.config/matugen/templates/colors.css'
-output_path = '~/.config/waybar/colors.css'
-post_hook = '~/scripts/launch.sh'
-
-[templates.vscodium]
-input_path = '~/.config/matugen/templates/vscodium-settings.json'
-output_path = '/dev/null'
-post_hook = '~/.config/matugen/hooks/vscodium.sh'
-
 [templates.nvim]
 input_path = '~/.config/matugen/templates/nvim.lua'
 output_path = '~/.config/nvim/lua/colors.lua'
@@ -36,11 +15,6 @@ post_hook = ''
 [templates.yazi]
 input_path = '~/.config/matugen/templates/yazi-theme.toml'
 output_path = '~/.config/yazi/theme.toml'
-post_hook = 'yazi --clear-cache'
-
-[templates.swaync]
-input_path = '~/.config/matugen/templates/swaync.css'
-output_path = '~/.config/swaync/colors.css'
 post_hook = ''
 
 [templates.kitty]
@@ -48,13 +22,7 @@ input_path = '~/.config/matugen/templates/kitty-colors.conf'
 output_path = '~/.config/kitty/colors.conf'
 post_hook = 'kitty @ set-colors -a ~/.config/kitty/colors.conf 2>/dev/null || true'
 
-[templates.p10k_colors]
-input_path = '~/.config/matugen/templates/p10k-colors.zsh'
-output_path = '~/.p10k-colors.zsh'
+[templates.awesome]
+input_path = "~/.config/matugen/templates/awesome-theme.lua"
+output_path = "~/.config/awesome/looks/colors.lua"
 post_hook = ''
-
-[templates.sioyek]
-input_path = '~/.config/matugen/templates/sioyek-colors.config'
-output_path = '~/.config/sioyek/colors_theme.config.raw'
-post_hook = 'awk -f ~/.config/matugen/hooks/sioyek-decimalize.awk ~/.config/sioyek/colors_theme.config.raw > ~/.config/sioyek/prefs_user.config && rm ~/.config/sioyek/colors_theme.config.raw'
-

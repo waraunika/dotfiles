@@ -29,7 +29,7 @@ start_reminder() {
             sleep "$INTERVAL"
             notify-send "⏰ Time for a break!" "You've been working for 20 minutes. Take a short rest!" -u normal -t 5000
             canberra-gtk-play -i bell 2>/dev/null || true
-						sleep "$BREAK"
+						sleep "$REST"
             notify-send "⏰ Start your work!" "You've been resting for 10 minutes now. Start working!!" -u normal -t 5000
             canberra-gtk-play -i bell 2>/dev/null || true
         done

@@ -12,16 +12,16 @@ border_style  = { fg = "{{colors.outline.dark.hex}}" }
 syntect_theme = "~/.config/yazi/tm-themes/Monokai Dark Soda.tmTheme"
 
 [indicator]
-parent = { fg = "{{colors.secondary.dark.hex}}", bg="{{colors.on_secondary.dark.hex | set_saturation: 80 | set_lightness: 35}}"}
-current = { fg = "{{colors.primary.dark.hex | set_lightness: 90}}", bg="{{colors.on_primary.dark.hex | set_lightness: 30}}", bold = true}
+parent = { fg = "{{colors.secondary.dark.hex}}", bg="{{colors.on_secondary.dark.hex}}"}
+current = { fg = "{{colors.primary.dark.hex}}", bg="{{colors.on_primary.dark.hex}}", bold = true}
 
 [tab]
 active   = { fg = "{{colors.primary.dark.hex}}", bg = "{{colors.on_primary.dark.hex}}" }
 inactive = { fg = "{{colors.secondary.dark.hex}}", bg = "{{colors.on_secondary.dark.hex}}" }
 
 [mode]
-normal_main = { fg = "{{colors.on_primary.dark.hex}}", bg = "{{colors.primary.dark.hex | set_lightness: 50}}", bold = true }
-normal_alt  = { fg = "{{colors.primary.dark.hex}}", bg = "{{colors.surface_container.dark.hex | set_lightness: 50}}" }
+normal_main = { fg = "{{colors.on_primary.dark.hex}}", bg = "{{colors.primary.dark.hex}}", bold = true }
+normal_alt  = { fg = "{{colors.primary.dark.hex}}", bg = "{{colors.surface_container.dark.hex}}" }
 
 select_main = { fg = "{{colors.on_secondary.dark.hex}}", bg = "{{colors.secondary.dark.hex}}", bold = true }
 select_alt  = { fg = "{{colors.secondary.dark.hex}}", bg = "{{colors.surface_container.dark.hex}}" }
@@ -35,7 +35,7 @@ unset_alt  = { fg = "{{colors.tertiary.dark.hex}}", bg = "{{colors.surface_conta
 bg = { bg = "{{colors.surface.dark.hex}}" }
 
 # Individual status elements - these control the bottom bar text
-style      = { fg = "{{colors.primary.dark.hex | set_lightness: 40}}" }
+style      = { fg = "{{colors.primary.dark.hex}}" }
 size_style      = { fg = "{{colors.on_surface.dark.hex}}" }
 date_style      = { fg = "{{colors.on_surface_variant.dark.hex}}" }
 sels_style      = { fg = "{{colors.primary.dark.hex}}" }

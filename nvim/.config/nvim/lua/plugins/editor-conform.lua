@@ -20,7 +20,6 @@ return {
 		formatters_by_ft = {
 			c = { "clang-format" },
 			cpp = { "clang-format" },
-			lua = { "stylua" },
 			python = { "isort", "black" },
 			javascript = prettier,
 			javascriptreact = prettier,
@@ -33,6 +32,7 @@ return {
 			verilog = { "verible_verilog_format" },
 			systemverilog = { "verible_verilog_format" },
 			sql = { "pg_format" },
+			lua = { "stylua" },
 		},
 
 		default_format_opts = {
@@ -49,6 +49,9 @@ return {
 			},
 			pg_format = {
 				append_args = { "-w", "90", "--vertical-align", "-g", "-k" },
+			},
+			stylua = {
+				command = "/home/death/src/stylua",
 			},
 		},
 	},

@@ -68,7 +68,7 @@ build_folder_entries() {
 }
 
 folder=$(build_folder_entries |
-  rofi -x11 -dmenu -i -p "Wallpaper color" \
+  rofi -dmenu -i -p "Wallpaper color" \
     -theme "${ROFI_DIR}/${THEME}.rasi" \
     -show-icons -icon-size "$ICON_SIZE" \
     -format 's')
@@ -85,7 +85,7 @@ build_image_entries() {
 }
 
 img=$(build_image_entries |
-  rofi -x11 -dmenu -i -p "$folder" \
+  rofi -dmenu -i -p "$folder" \
     -theme "${ROFI_DIR}/${THEME}.rasi" \
     -show-icons -icon-size "$ICON_SIZE" \
     -format 's')
@@ -95,7 +95,7 @@ img=$(build_image_entries |
 WALL="$WALL_DIR/$folder/$img"
 
 # --- Apply wallpaper ---
-awww img "$WALL"
+feh --bg-fill "$WALL"
 
 # --- Generate theme ---
 matugen image "$WALL" --source-color-index 0

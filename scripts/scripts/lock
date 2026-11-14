@@ -1,0 +1,101 @@
+#!/bin/bash
+
+conf="$HOME/.config}/awesome"
+img="${XDG_RUNTIME_DIR:-/tmp}/lock-bg.jpg"
+font="JetBrainsMono Nerd Font Propo"
+
+# already locked
+pgrep -x i3lock >/dev/null && exit 0
+
+LOCK_SURFACE=0f1417
+LOCK_TEXT=dfe3e7
+LOCK_PRIMARY=92cef5
+LOCK_TERTIARY=ccc1e9
+LOCK_ERROR=ffb4ab
+LOCK_OUTLINE=8b9198
+# shellcheck disable=SC1091
+[ -f "$conf/lock-colors.sh" ] && . "$conf/lock-colors.sh"
+
+# while locked
+dunst_was=$(dunstctl is-paused 2>/dev/null)
+dunstctl set-paused true 2>/dev/null
+dunstctl close-all 2>/dev/null
+playerctl -a pause 2>/dev/null
+
+cleanup() {
+	[ "$dunst_was" = "false" ] && dunstctl set-paused false 2>/dev/null
+	rm -f "$img"
+}
+trap cleanup EXIT
+
+# ---- Background ------------------------------------------------------------
+im=$(command -v magick || command -v convert)
+
+# 1) blurred + darkened screenshot
+shot_bg() {
+	[ -n "$im" ] || return 1
+	command -v maim >/dev/null || return 1
+	set -o pipefail
+	maim --hidecursor 2>/dev/null |
+		"$im" png:- -filter Gaussian -resize 25% -blur 0x2 -resize 400% \
+			-fill "#$LOCK_SURFACE" -colorize 30% "$img" 2>/dev/null
+	[ -s "$img" ]
+}
+
+# 2) lock-bg.jpg, scaled and cropped to fill each monitor
+image_bg() {
+	local src="$conf/lock-bg.jpg"
+	[ -n "$im" ] && [ -f "$src" ] || return 1
+	local tw th
+	read -r tw th < <(xrandr | sed -n 's/.*current \([0-9]*\) x \([0-9]*\),.*/\1 \2/p')
+	[ -n "$tw" ] || return 1
+	local args=(-size "${tw}x${th}" "xc:#$LOCK_SURFACE")
+	local mw mh mx my
+	while read -r mw mh mx my; do
+		args+=(\( "$src" -resize "${mw}x${mh}^" -gravity center -extent "${mw}x${mh}" \)
+			-geometry "+${mx}+${my}" -composite)
+	done < <(xrandr --listmonitors | sed -n 's/.* \([0-9]*\)\/[0-9]*x\([0-9]*\)\/[0-9]*+\([0-9]*\)+\([0-9]*\).*/\1 \2 \3 \4/p')
+	"$im" "${args[@]}" "$img" 2>/dev/null
+	[ -s "$img" ]
+}
+
+if shot_bg || image_bg; then
+	bg=(-i "$img")
+else
+	# 3) i3lock-color takes and blurs its own screenshot
+	bg=(--blur 6)
+fi
+
+# Lock
+i3lock --nofork \
+	--ignore-empty-password --show-failed-attempts \
+	"${bg[@]}" \
+	--indicator --force-clock --radius 110 --ring-width 8 \
+	--inside-color=00000000 \
+	--ring-color="${LOCK_PRIMARY}cc" \
+	--insidever-color="${LOCK_SURFACE}99" \
+	--ringver-color="${LOCK_TERTIARY}ff" \
+	--insidewrong-color="${LOCK_ERROR}55" \
+	--ringwrong-color="${LOCK_ERROR}ff" \
+	--line-color=00000000 --separator-color=00000000 \
+	--keyhl-color="${LOCK_TEXT}ff" \
+	--bshl-color="${LOCK_ERROR}ff" \
+	--time-color="${LOCK_TEXT}ff" --date-color="${LOCK_OUTLINE}ff" \
+	--time-str="%H:%M" --date-str="%a, %d %b" \
+	--time-font="$font" --date-font="$font" \
+	--time-size=46 --date-size=14 \
+	--verif-text="..." --verif-color="${LOCK_TERTIARY}ff" \
+	--wrong-text="wrong" --wrong-color="${LOCK_ERROR}ff" \
+	--noinput-text="" --lock-text="" --lockfailed-text="failed" \
+	--verif-font="$font" --wrong-font="$font" \
+	--verif-size=16 --wrong-size=16 &
+i3lock_pid=$!
+
+# xss-lock --transfer-sleep-lock hands us a systemd sleep-lock fd. i3lock closes
+# its own copy once the screen is locked; close ours now so suspend isn't held
+# up by this wrapper.
+if [[ ${XSS_SLEEP_LOCK_FD:-} =~ ^[0-9]+$ ]]; then
+	eval "exec ${XSS_SLEEP_LOCK_FD}>&-"
+fi
+
+wait "$i3lock_pid

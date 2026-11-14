@@ -1,0 +1,22 @@
+#!/bin/bash
+command -v brightnessctl >/dev/null || exit 0
+
+cur=$(brightnessctl get 2>/dev/null) || exit 0
+[[ $cur =~ ^[0-9]+$ ]] || exit 0
+
+low=$((cur * 30 / 100))
+[ "$low" -lt 1 ] && low=1
+
+sleep_pid=
+restore() {
+	[ -n "$sleep_pid" ] && kill "$sleep_pid" 2>/dev/null
+	brightnessctl -q set "$cur" 2>/dev/null
+}
+trap 'exit 0' TERM INT
+trap restore EXIT
+
+brightnessctl -q set "$low" 2>/dev/null
+
+sleep 2147483647 &
+sleep_pid=$!
+wait "$sleep_pid"

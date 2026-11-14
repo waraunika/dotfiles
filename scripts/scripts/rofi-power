@@ -1,0 +1,11 @@
+#!/bin/sh
+# ~/scripts/rofi-power  (chmod +x)
+choice=$(printf 'Lock\nLogout\nSuspend\nReboot\nShutdown\n' | rofi -dmenu -i -p power)
+
+case "$choice" in
+	Lock)     xset s activate ;;
+	Logout)   echo 'awesome.quit()' | awesome-client ;;
+	Suspend)  systemctl suspend ;;
+	Reboot)   systemctl reboot ;;
+	Shutdown) systemctl poweroff ;;
+esac

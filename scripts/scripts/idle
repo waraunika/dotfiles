@@ -1,0 +1,76 @@
+#!/bin/bash
+# ~/scripts/idle
+# one place for idle timings and for pausing them.
+#
+#   idle apply        set timings (inhibited or not, depending on the flags)
+#   idle auto on|off  fullscreen flag, called from awesome (signals.lua)
+#   idle toggle       manual "stay awake" flag
+#   idle status
+#
+# Normal:    X screensaver at LOCK_AFTER (xss-lock locks, NOTIFY seconds of dim
+#            before), DPMS turns the displays off at DPMS_OFF seconds of idle.
+# Inhibited: both disabled. Suspend/lid-close locking via xss-lock still works,
+#            and Super+Shift+L (xset s activate) still locks.
+
+LOCK_AFTER=300 # 5 min
+NOTIFY=5       # dim warning, seconds
+DPMS_OFF=600   # 10 min idle = displays off (5 min after the lock)
+
+dir="${XDG_RUNTIME_DIR:-/tmp}/idle-inhibit"
+mkdir -p "$dir"
+
+inhibited() { [ -e "$dir/fullscreen" ] || [ -e "$dir/manual" ]; }
+
+say() {
+	command -v notify-send >/dev/null &&
+		notify-send -t 1500 -h string:x-dunst-stack-tag:idle "Idle lock" "$1"
+}
+
+apply() {
+	if inhibited; then
+		xset s off
+		xset -dpms
+	else
+		xset s noblank
+		xset s "$LOCK_AFTER" "$NOTIFY"
+		xset +dpms
+		xset dpms 0 0 "$DPMS_OFF"
+	fi
+}
+
+case "${1:-apply}" in
+apply) apply ;;
+auto)
+	case "$2" in
+	on) touch "$dir/fullscreen" ;;
+	off) rm -f "$dir/fullscreen" ;;
+	*) echo "usage: idle auto on|off" >&2; exit 1 ;;
+	esac
+	apply
+	;;
+toggle)
+	if [ -e "$dir/manual" ]; then
+		rm -f "$dir/manual"
+		apply
+		say "back on (lock in $((LOCK_AFTER / 60)) min)"
+	else
+		touch "$dir/manual"
+		apply
+		say "paused (staying awake)"
+	fi
+	;;
+status)
+	if inhibited; then
+		echo -n "inhibited:"
+		[ -e "$dir/fullscreen" ] && echo -n " fullscreen"
+		[ -e "$dir/manual" ] && echo -n " manual"
+		echo
+	else
+		echo "active: lock ${LOCK_AFTER}s, display off ${DPMS_OFF}s"
+	fi
+	;;
+*)
+	echo "usage: idle [apply|auto on|off|toggle|status]" >&2
+	exit 1
+	;;
+esac

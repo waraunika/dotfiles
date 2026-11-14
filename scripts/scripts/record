@@ -1,0 +1,52 @@
+#!/bin/bash
+# ~/scripts/record  (chmod +x)
+# X11 replacement for record_audioless.sh / record_audiofull.sh
+#   record          select a region, record video only
+#   record audio    select a region, record video + default mic
+# Run it again to stop.
+
+PID_FILE="/tmp/x11_record.pid"
+FILE_REF="/tmp/x11_record.file"
+OUT_DIR="$HOME/Videos/Screenrecords"
+
+# Stop if already recording
+if [ -f "$PID_FILE" ] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null; then
+	kill -INT "$(cat "$PID_FILE")"
+	# give ffmpeg a moment to finish writing the file
+	for _ in $(seq 1 50); do
+		kill -0 "$(cat "$PID_FILE")" 2>/dev/null || break
+		sleep 0.1
+	done
+	notify-send "Recording stopped" "Video saved - $(cat "$FILE_REF")"
+	rm -f "$PID_FILE" "$FILE_REF"
+	exit 0
+fi
+rm -f "$PID_FILE" "$FILE_REF"
+
+mkdir -p "$OUT_DIR"
+
+# Region select (Escape cancels). Size must be even for yuv420p.
+geom=$(slop -f "%x %y %w %h") || exit 0
+read -r x y w h <<<"$geom"
+w=$((w / 2 * 2))
+h=$((h / 2 * 2))
+if [ "$w" -lt 2 ] || [ "$h" -lt 2 ]; then
+	exit 0
+fi
+
+file="$OUT_DIR/record_$(date +%Y-%m-%d-%H%M%S).mp4"
+
+audio_args=()
+if [ "${1:-}" = "audio" ]; then
+	audio_args=(-f pulse -i default -c:a aac -b:a 128k)
+fi
+
+ffmpeg -nostdin -loglevel error \
+	-f x11grab -framerate 60 -video_size "${w}x${h}" -i "${DISPLAY:-:0}+${x},${y}" \
+	"${audio_args[@]}" \
+	-c:v libx264 -preset veryfast -crf 23 -pix_fmt yuv420p \
+	"$file" &
+
+echo $! >"$PID_FILE"
+echo "$file" >"$FILE_REF"
+notify-send "Recording started" "Run again to stop"
